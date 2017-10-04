@@ -2,7 +2,8 @@
   "name": "social-sense",
   "scripts": {
     "start": "node app.js",
-    "serve": "nodemon app.js"
+    "serve": "nodemon app.js",
+    "test": "nodemon app.js"
   },
   "version": "0.0.2",
   "description": "The Social Observatory",
@@ -33,8 +34,10 @@
     "googleapis": "^19.0.0",
     "graphql": "^0.9.4",
     "morgan": "^1.6.1",
+    "mysql": "^2.14.1",
     "node-fetch": "^1.7.3",
     "node-flickr": "^1.0.0",
+    "nodemon": "^1.12.1",
     "nodeweibo": "^2.0.4",
     "passport": "^0.2.2",
     "passport-facebook": "^2.0.0",

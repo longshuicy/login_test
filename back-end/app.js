@@ -1,24 +1,12 @@
 var express = require('express');
 var passport = require('passport');
-//var expressVue = require('express-vue');
 var session = require('express-session');
-//var graphQLHTTP = require('express-graphql');
-//var schema = require('./graphql/schema/schema.js');
 var config = require('./config.js');
 var app = express();
 var cors = require('cors')
 var bodyParser = require('body-parser');
 
-// Configure view engine to render pug templates.
 
-//app.use('/graphql',cors(), graphQLHTTP({
-//	schema,
-//	graphiql:true,	
-//}));
-
-
-// app.set('view engine', 'pug');
-// app.set('views', __dirname +  '/views');
 app.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Credentials', true);
 	res.header('Access-Control-Allow-Origin', 'http://localhost:5000');

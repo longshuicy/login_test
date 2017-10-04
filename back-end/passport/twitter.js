@@ -43,6 +43,7 @@ router.get('/login/twitter/return', passport.authorize('twitter', { failureRedir
 
 router.post('/twitterQuery',function(req,res){
   query = req.body.query;
+  //console.log(query);
   client.hgetall(req.sessionID, function (err, obj){
     if (err){
       var problem = {status: "Fail", err:err};
@@ -50,10 +51,10 @@ router.post('/twitterQuery',function(req,res){
       res.end();
     }
     else{
-        // console.log("twitter_AT:");
-        // console.log(obj.twitter_AT);
-        // console.log("twitter_TS:");
-        // console.log(obj.twitter_TS);
+        //console.log("twitter_AT:");
+        //console.log(obj.twitter_AT);
+        //console.log("twitter_TS:");
+        //console.log(obj.twitter_TS);
         var headers = {
             'Accept': 'application/json',
             'Content-Type':'application/json',

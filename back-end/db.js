@@ -8,7 +8,13 @@ var connection = mysql.createConnection({
   database : config.db.database
 });
 
-connection.connect();
+connection.connect(function(err){
+	if (err){
+		console.error('error connecting: ' + err.stack);
+		return ;
+	}
+	console.log('connected as id' + connection.threadId);
+});
 
 var retrieveUserByUsername = function(username, cb) {
     
@@ -35,9 +41,9 @@ var retrieveUserByUsername = function(username, cb) {
 //   });
 // }
 
-var retrieveUserId = function(id, cb){
+var retrieveUserId = function(username, cb){
   var sql = 'SELECT * FROM users WHERE ? LIMIT 1;';
-  var params = {'id': id};
+  var params = {'username': username};
 
   connection.query(sql, params, function(err, res, fields){
     if(res)
@@ -50,7 +56,6 @@ var retrieveUserId = function(id, cb){
 
 var storeUser = function(user, cb){
   var sql = 'INSERT INTO users SET ?';
-
   connection.query(sql, user, function(err, res, fields){
     cb(err, res);
   });

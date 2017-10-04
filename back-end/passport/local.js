@@ -38,13 +38,13 @@ passport.use(new Strategy(
 // serializing, and querying the user record by ID from the database when
 // deserializing.
 passport.serializeUser(function(user, cb) {
-  console.log("serialize called!")
-  cb(null, user.id);
+  //console.log(user)
+  cb(null, user.username);
 });
 
-passport.deserializeUser(function(id, cb) {
+passport.deserializeUser(function(username, cb) {
   console.log("deserialize called!")
-  db.retrieveUserId(id, function (err, user) {
+  db.retrieveUserId(username, function (err, user) {
     if (err) { return cb(err); }
     cb(null, user);
   });
@@ -86,8 +86,9 @@ router.get('/logout', function(req, res){
  *    4) If all the above conditions hold, save the user into the database with a salted password 
  *       and redirect the user agent to the home screen
  */
-router.post('/register',function(req,res){
-
+router.post('/register',function(req,res,next){
+  //console.log(req.body);
+	
   if (!req.body.username || !req.body.password) {
     var problem = {error:'You need a username and a password to register.'};
      res.send(problem); 
@@ -122,7 +123,7 @@ router.post('/register',function(req,res){
         }
        
         var newUser = {username: req.body.username, password: hash};
-        
+        //console.log(hash);
         db.storeUser(newUser, function(err, result){
           if (err) {
             return next(err);

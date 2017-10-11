@@ -7,47 +7,9 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitTwitter()">Submit for Twitter</button>
         <button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitReddit()">Submit for Reddit</button>
 		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitSpotify()">Submit for Spotify</button>
-		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitFlickr()">Submit for Flickr</button>
+		<!-- button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitFlickr()">Submit for Flickr</button -->
 		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitInstagram()">Submit for Instagram</button>
     </form>
-<!--     <div id="main">
-        <canvas id="myCanvas" width="1200" height="550"></canvas>
-        
-        <div id='user'>
-            <p>q: <input type='text' style="width: 40%;" @change="getKeyword(this.getAttribute(value))"/></p>
-            <p id="common">count: <input id='fuck' type='number' name='count' min='0' style="width: 25%;" value='3' @change="getCount(document.getElementById('fuck').getAttribute('value'))"/></p>
-            <p>page: <input type='number' name='page' min='0' style="width: 25%;" value='5' @change="getPage(this.value)"/></p>
-        </div>
-        
-        <div id='tweet'>
-            <p>q: <input type='text' style="width: 40%;" @change="getKeyword(this.value)"/></p>
-            <p>count: <input type='number' name='count' min='0' style="width: 25%;" @change="getCountTweet(this.value)"/></p>
-            <p>geocode: <input type='text' style="width: 40%;" @change="getOptionalParas('geocode:', this.value)" /></p>
-            <p>result_type: <select @change="getType(this.value)">
-                <option value="mixed">mixed</option>
-                <option value="recent">recent</option>
-                <option value="popular">popular</option></select></p>
-            <p>locale: <input type='text' style="width: 40%;" @change="getOptionalParas('locale:', this.value)"/></p>
-            <p>until: <input type='date' style="width: 90%;" @change="getOptionalParas('until:', this.value)"/></p>
-        </div>
-        
-        <div id='geo'>
-            <p>query: <input type='text' style="width: 40%;" @change="getOptionalParas('query:', this.value)"/></p>
-            <p>ip: <input type='text' style="width: 40%;" @change="getOptionalParas('ip:', this.value)"/></p>
-            <p>lat: <input type='text' style="width: 40%;" @change="getOptionalParas('lat:', this.value)"/></p>
-            <p>long: <input type='text' style="width: 40%;" @change="getOptionalParas('long:', this.value)"/></p>
-            <p>granularity: <select @change="getOptionalParas('granularity:', this.value)">
-                <option value="neighborhood">neighborhood</option>
-                <option value="poi">poi</option>
-                <option value="city">city</option>
-                <option value="admin">admin</option>
-                <option value="country">country</option></select></p>
-            <p>accuracy: <input type='text' style="width: 40%;" @change="('accuracy:', this.value)"/></p>
-            <p>max_results: <input type='number' style="width: 25%;" @change="getOptionalParas('max_results:', this.value)"/></p>
-        </div> 
-    </div>
-  
-    <p id="string"></p>-->
   </div>
 </template>
 
@@ -208,7 +170,7 @@ export default {
         this.queryUserParameters.style.display = "none";
         
         var circle = new createjs.Shape();
-                console.log(this.tweetColor); // => 'updated'
+        console.log(this.tweetColor); // => 'updated'
         circle.graphics.beginFill(this.tweetColor).drawCircle(0, 0, 65);
         circle.x = 250;
         circle.y = 180;

@@ -28,11 +28,11 @@
             <icon name="instagram" scale = '5' color = "#333"></icon>
             <h4>INSTAGRAM</h4>
           </div>
-          <div @click = "wikiClick()" v-if = "wikimedia" class="col-sm-4">
+          <div @click = "wikiClick()" v-if = "loginArray['wikimedia']" class="col-sm-4">
             <icon name="wikipedia-w" scale = '5'></icon>
             <h4>Wikipedia</h4>
           </div>
-          <div @click = "stackClick()" v-if = "stackoverflow" class="col-sm-4">
+          <div @click = "stackClick()" v-if = "loginArray['stackoverflow']" class="col-sm-4">
             <icon name="stack-overflow" scale = '5'></icon>
             <h4>StackOverflow</h4>
           </div>
@@ -52,13 +52,9 @@
             <icon name="youtube-square" scale = '5' color = "#bb0000"></icon>
             <h4>Youtube</h4>
           </div>
-          <div @click = "pinClick()" v-if = "pinterest" class="col-sm-4">
+          <div @click = "pinClick()" v-if = "!loginArray['pinterest']" class="col-sm-4">
             <icon name="pinterest-square" scale = '5' color = "#cb2027"></icon>
             <h4>Pinterest</h4>
-          </div>
-          <div @click = "weiboClick()" v-if = "weibo" class="col-sm-4">
-            <icon name="weibo" scale = '5' color = "#FF0000"></icon>
-            <h4>Weibo</h4>
           </div>
           <div @click = "tumblrClick()" v-if = "!loginArray['tumblr']" class="col-sm-4">
             <icon name="tumblr-square" scale = '5' color = "#32506d"></icon>
@@ -80,15 +76,15 @@
             <icon name="twitter-square" scale = '5' color = "#4099FF"></icon>
             <h4>TWITTER</h4>
           </div>
-          <div v-if = "!instagram" class="col-sm-4">
+          <div v-if = "loginArray['instagram']" class="col-sm-4">
             <icon name="instagram" scale = '5'></icon>
             <h4>INSTAGRAM</h4>
           </div>
-          <div v-if = "!wikimedia" class="col-sm-4">
+          <div v-if = "loginArray['wikimedia']" class="col-sm-4">
             <icon name="wikipedia-w" scale = '5'></icon>
             <h4>Wikipedia</h4>
           </div>
-          <div v-if = "!stackoverflow" class="col-sm-4">
+          <div v-if = "loginArray['stackoverflow']" class="col-sm-4">
             <icon name="stack-overflow" scale = '5'></icon>
             <h4>StackOverflow</h4>
           </div>
@@ -108,14 +104,10 @@
             <icon name="youtube-square" scale = '5' color = "#bb0000"></icon>
             <h4>Youtube</h4>
           </div>
-          <div v-if = "!pinterest" class="col-sm-4">
+          <div v-if = "loginArray['pinterest']" class="col-sm-4">
             <icon name="pinterest-square" scale = '5' color = "#cb2027"></icon>
             <h4>Pinterest</h4>
           </div>
-          <!-- div v-if = "!weibo" class="col-sm-4">
-            <icon name="weibo" scale = '5' color = "#FF0000"></icon>
-            <h4>Weibo</h4>
-          </div -->
           <div v-if = "loginArray['tumblr']" class="col-sm-4">
             <icon name="tumblr-square" scale = '5' color = "#32506d"></icon>
             <h4>Tumblr</h4>
@@ -146,11 +138,9 @@
       }
     },
     computed: mapState({
-      //instagram: state=>state.instagram,
       wikimedia: state=>state.wikimedia,
       stackoverflow: state=>state.stackoverflow,
-      pinterest: state=>state.pinterest,
-      weibo: state=>state.weibo,
+      pinterest: state=>state.pinterest
     }),
 
     methods: {
@@ -194,9 +184,6 @@
       },
       pinClick() {
         this.$store.commit('switchSoicalState', 'pinterest');
-      },
-      weiboClick() {
-        this.$store.commit('switchSoicalState', 'weibo');
       },
       tumblrClick() {
         this.mainClick('tumblr');

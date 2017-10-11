@@ -51,10 +51,7 @@ router.post('/twitterQuery',function(req,res){
       res.end();
     }
     else{
-        //console.log("twitter_AT:");
-        //console.log(obj.twitter_AT);
-        //console.log("twitter_TS:");
-        //console.log(obj.twitter_TS);
+        console.log(obj);
         var headers = {
             'Accept': 'application/json',
             'Content-Type':'application/json',

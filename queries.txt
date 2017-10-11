@@ -1,0 +1,42 @@
+{
+  wikipedia{
+    wikiPageContent(titles:"google"){
+      batchcomplete
+      query{
+        pages{
+          pageID{
+            pageid
+            title
+            revisions{
+              contentmodel
+              contentformat
+              html
+            }
+          }
+        }
+      }
+    }
+  }
+
+  stackoverflow{
+    advancedSearch(q:"python loop"){
+      items{
+        tags
+        owner {
+          reputation
+          user_id
+          user_type
+          profile_image
+          display_name
+          link
+        }
+        view_count
+        title
+      }
+      has_more
+      quota_max
+      quota_remaining
+    }
+    
+  }
+}

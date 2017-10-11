@@ -71,12 +71,12 @@ router.post('/twitterQuery',function(req,res){
             return response.text();
         }).then(function(responseBody){
 
-            fs.writeFile("/Users/zongyiwang/Desktop/query_result.json", responseBody, function(err) {
+            /*fs.writeFile("/Users/zongyiwang/Desktop/query_result.json", responseBody, function(err) {
               if(err) {
                   return console.log(err);
               }
               console.log("The file was saved!");
-            }); 
+            }); */
 
             var send = {status: 'OK', answer: responseBody};
             res.send(send);

@@ -6,6 +6,9 @@
 
         <button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitTwitter()">Submit for Twitter</button>
         <button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitReddit()">Submit for Reddit</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitSpotify()">Submit for Spotify</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitFlickr()">Submit for Flickr</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitInstagram()">Submit for Instagram</button>
     </form>
 <!--     <div id="main">
         <canvas id="myCanvas" width="1200" height="550"></canvas>
@@ -102,6 +105,9 @@ export default {
 
          query_string_twitter: `{twitter {queryUser(q: \"bill\", count: 4, pageNum: 1) {author_id, profile_image_url}}}`,
          query_string_reddit: `{reddit{searchSubredditNames(query:"uiuc")}}`,
+		 query_string_spotify:`{spotify {searchArtists(q:"Jay-z",limit:1) {href,id,name,type,uri }}}`,
+		 query_string_flickr: `{flickr{recentPhotos(extras:"0",per_page:10,page:1){id,title}}}`,
+		 query_string_instagram:`{ instagram{locationSearch(lat:40.1164, lng:-88.2434){data{id,name,latitude,longitude}}}}`,
       }
     },
 
@@ -111,7 +117,6 @@ export default {
                 if (response.body.status == 'OK'){
                     alert(response.body.answer);
                     console.log(response.body.answer);
-                    alert("The query file is successfully downloaded!");
                 }
                 else{
                     alert("Looks like there is something wrong, try again!");
@@ -123,8 +128,7 @@ export default {
             this.$http.post('http://localhost:3000/redditQuery',{query: this.query_string_reddit}).then(response=>{
                 if (response.body.status == 'OK'){
                     alert(response.body.answer);
-                    console.log(response.body.answer);
-                    alert("The query file is successfully downloaded!");
+                    console.log(response.body.answer);       
                 }
                 else{
                     alert("Looks like there is something wrong, try again!");
@@ -132,14 +136,39 @@ export default {
             });
         },
 
-        // sendrequest(){
-        //     this.$http.post('http://localhost:3000/getTwitterCred',{sessionID: this.sessionID, query: this.request_string}).then(response=>{
-        //         alert("result:");
-        //         alert(response.body.obj);
-        //         alert(response.body.twitter_AT);
-        //     });            
-        // },
-
+        submitSpotify(){
+            this.$http.post('http://localhost:3000/spotifyQuery',{query: this.query_string_spotify}).then(response=>{
+                if (response.body.status == 'OK'){
+                    alert(response.body.answer);
+                    console.log(response.body.answer);
+                }
+                else{
+                    alert("Looks like there is something wrong, try again!");
+                }
+            });
+        },
+		submitFlickr(){
+            this.$http.post('http://localhost:3000/flickrQuery',{query: this.query_string_flickr}).then(response=>{
+                if (response.body.status == 'OK'){
+                    alert(response.body.answer);
+                    console.log(response.body.answer);
+                }
+                else{
+                    alert("Looks like there is something wrong, try again!");
+                }
+            });
+        },
+		submitInstagram(){
+			this.$http.post('http://localhost:3000/instagramQuery',{query: this.query_string_instagram}).then(response=>{
+                if (response.body.status == 'OK'){
+                    alert(response.body.answer);
+                    console.log(response.body.answer);
+                }
+                else{
+                    alert("Looks like there is something wrong, try again!");
+                }
+            });
+        },
 
       handleMouseOver(event){
         event.target.alpha = ((event.type=="mouseover") ? 0.75 : 0.5);

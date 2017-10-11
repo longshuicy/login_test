@@ -147,5 +147,3 @@ const twitterQueryType = module.exports = new GraphQLObjectType({
 const twtUserType = require('./twitter-type/twtUserType');
 const tweetType = require('./twitter-type/twtTweetType');
 const twtGeoType = require('./twitter-type/twtGeoType');
-
-module.exports = twitterQueryType;

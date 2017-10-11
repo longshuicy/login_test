@@ -7,8 +7,17 @@ var {
 	GraphQLList
 } = require('graphql');
 
-const twitterQueryType = require('./twitterSchema');
+const mediaWikiQueryType = require('./mediaWikiSchema');
+const facebookQueryType = require('./fbSchema');
+const flickrQueryType = require('./flickrSchema');
+const instagramQueryType = require('./instagramSchema');
+const pinterestQueryType = require('./pinterestSchema');
 const redditQueryType = require('./redditSchema');
+const spotifyQueryType = require('./spotifySchema');
+const stackExchangeQueryType = require('./stackExchangeSchema');
+const tumblrQueryType = require('./tumblrSchema');
+const twitterQueryType = require('./twitterSchema');
+const youtubeQueryType = require('./youtubeSchema');
 
 function wrapper(){
 	//console.log(headers);
@@ -26,6 +35,26 @@ const Query = new GraphQLObjectType({
 		reddit:{
 			type: redditQueryType,
 			resolve:() => wrapper()
+		},
+		wikipedia:{
+			type: mediaWikiQueryType,
+			resolve: () => wrapper()
+		},
+		stackoverflow: {
+			type: stackExchangeQueryType,
+			resolve: () => wrapper()
+		},
+		spotify: {
+			type: spotifyQueryType,
+			resolve: () => wrapper()
+		},
+		flickr: {
+			type: flickrQueryType,
+			resolve: () => wrapper()
+		},
+		instagram: {
+			type: instagramQueryType,
+			resolve: () => wrapper()
 		}
 	})
 });

@@ -24,8 +24,8 @@
             <icon name="twitter-square" scale = '5' color = "#4099FF"></icon>
             <h4>TWITTER</h4>
           </div>
-          <div @click = "insClick()" v-if = "instagram" class="col-sm-4">
-            <icon name="instagram" scale = '5'></icon>
+          <div @click = "insClick()" v-if = "!loginArray['instagram']" class="col-sm-4">
+            <icon name="instagram" scale = '5' color = "#333"></icon>
             <h4>INSTAGRAM</h4>
           </div>
           <div @click = "wikiClick()" v-if = "wikimedia" class="col-sm-4">
@@ -112,10 +112,10 @@
             <icon name="pinterest-square" scale = '5' color = "#cb2027"></icon>
             <h4>Pinterest</h4>
           </div>
-          <div v-if = "!weibo" class="col-sm-4">
+          <!-- div v-if = "!weibo" class="col-sm-4">
             <icon name="weibo" scale = '5' color = "#FF0000"></icon>
             <h4>Weibo</h4>
-          </div>
+          </div -->
           <div v-if = "loginArray['tumblr']" class="col-sm-4">
             <icon name="tumblr-square" scale = '5' color = "#32506d"></icon>
             <h4>Tumblr</h4>
@@ -135,11 +135,18 @@
     name: 'dashboard',
     data () {
       return{
-        loginArray: {'facebook': false, 'twitter': false, 'flickr': false, 'spotify': false, 'reddit': false, 'youtube': false, 'tumblr': false},
+        loginArray: {'facebook': false, 
+		'twitter': false, 
+		'flickr': false, 
+		'spotify': false, 
+		'reddit': false, 
+		'youtube': false, 
+		'tumblr': false,
+		'instagram':false},
       }
     },
     computed: mapState({
-      instagram: state=>state.instagram,
+      //instagram: state=>state.instagram,
       wikimedia: state=>state.wikimedia,
       stackoverflow: state=>state.stackoverflow,
       pinterest: state=>state.pinterest,
@@ -164,7 +171,8 @@
         this.mainClick('twitter');
       },
       insClick() {
-        this.$store.commit('switchSoicalState', 'instagram');
+        //this.$store.commit('switchSoicalState', 'instagram');
+		this.mainClick('instagram');
       },
       wikiClick() {
         this.$store.commit('switchSoicalState', 'wikimedia');

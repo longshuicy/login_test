@@ -59,14 +59,12 @@ router.post('/redditQuery',function(req,res){
             return response.text();
         }).then(function(responseBody){
 
-        console.log("I get string!!!!")
-
-            fs.writeFile("/Users/zongyiwang/Desktop/query_result.json", responseBody, function(err) {
+            /*fs.writeFile("/Users/zongyiwang/Desktop/query_result.json", responseBody, function(err) {
               if(err) {
                   return console.log(err);
               }
               console.log("The file was saved!");
-            }); 
+            }); */
 
             var send = {status: 'OK', answer: responseBody};
             res.send(send);

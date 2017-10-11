@@ -2,7 +2,7 @@ require('dotenv').config();
 var config = {};
 
 //config.authProviders = ['twitter','reddit','facebook','github','fitbit','flickr', 'instagram', 'spotify','tumblr','youtube','local'];
-config.authProviders = ['twitter','reddit','facebook','flickr','spotify','tumblr','youtube','local'];
+config.authProviders = ['twitter','reddit','facebook','flickr','spotify','instagram','tumblr','youtube','local'];
 
 config.twitter = {};
   config.twitter.consumer_key    =  process.env.TWITTER_CONSUMER_KEY    || '';
@@ -28,9 +28,9 @@ config.flickr = {};
   config.flickr.consumer_key = process.env.FLICKR_CONSUMER_KEY || '';
   config.flickr.consumer_secret = process.env.FLICKR_CONSUMER_SECRET || '';
 
-/*config.instagram = {};
+config.instagram = {};
   config.instagram.client_id = process.env.INSTAGRAM_ID|| '';
-  config.instagram.client_secret = process.env.INSTAGRAM_SECRET || '';*/
+  config.instagram.client_secret = process.env.INSTAGRAM_SECRET || '';
 
 config.spotify= {};
   config.spotify.client_id = process.env.SPOTIFY_CLIENT_ID || '';

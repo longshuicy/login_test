@@ -24,7 +24,7 @@ const spotifyUserType = module.exports = new GraphQLObjectType({
 		uri:			{type:GraphQLString},
 		/*-----------------------nested----------------------*/
 		playlists:		{type:new GraphQLList(spotifyPlaylistType),
-							resolve:({id}) => spotifyAPI(resolveName = 'getUserPlaylists', id = id, args = {})},
+							resolve:({id},_,context) => spotifyAPI(context,resolveName = 'getUserPlaylists', id = id, args = {})},
 	})
 });
 

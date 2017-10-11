@@ -107,7 +107,7 @@ export default {
          query_string_reddit: `{reddit{searchSubredditNames(query:"uiuc")}}`,
 		 query_string_spotify:`{spotify {searchArtists(q:"Jay-z",limit:1) {href,id,name,type,uri }}}`,
 		 query_string_flickr: `{flickr{recentPhotos(extras:"0",per_page:10,page:1){id,title}}}`,
-		 query_string_instagram:`{ instagram{locationSearch(lat:40.1164, lng:-88.2434){data{id,name,latitude,longitude}}}}`,
+		 query_string_instagram:`{instagram{usersSelf{data{id, username, full_name, profile_picture}}}}`,
       }
     },
 

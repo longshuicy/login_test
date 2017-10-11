@@ -32,9 +32,9 @@ const spotifyTrackType = module.exports = new GraphQLObjectType({
 		uri:				{type:GraphQLString},
 		/*--------------------------nesting-----------------------------*/
 		audioFeatures:		{type:spotifyAudioFeaturesType,
-								resolve:({id}) => spotifyAPI(resolveName = 'audioFeatures', id=id, args = {})},
+								resolve:({id},_,context) => spotifyAPI(context,resolveName = 'audioFeatures', id=id, args = {})},
 		audioAnalysis:		{type:spotifyAudioAnalysisType,
-								resolve:({id}) => spotifyAPI(resolveName = 'audioAnalysis', id=id, args = {})},
+								resolve:({id},_,context) => spotifyAPI(context,resolveName = 'audioAnalysis', id=id, args = {})},
 	})
 });
 

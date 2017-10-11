@@ -1,16 +1,16 @@
 require('dotenv').config();
 var Promise = require('promise');
 var Flickr = require("node-flickr")
-var keys = {
-      "api_key": process.env.FLICKR_CONSUMER_KEY,
-      "secret": process.env.FLICKR_CONSUMER_SECRET,
-	  "user_id": process.env.FLICKR_USER_ID,
-	  "access_token": process.env.FLICKR_ACCESS_TOKEN,
-	  "access_token_secret": process.env.FLICKR_ACCESS_TOKEN_SECRET
-	  };
-var flickr = new Flickr(keys);
 
 function flickrAPI(endpoint,addon,args,resolveName){
+	
+	var flickr = new Flickr(Flickr.OAuth.createPlugin(
+		process.env.FLICKR_CONSUMER_KEY,
+		process.env.FLICKR_CONSUMER_SECRET,
+		'72157682112043746-7c07f3e7bbe1d9cd',
+		'87fc0dc9c7b2b9f9'
+	));
+	
 	Object.assign(args,addon);
 	return new Promise((resolve,reject) =>{
 		flickr.get(endpoint, args, function(err, result){

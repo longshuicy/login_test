@@ -32,7 +32,6 @@ router.get('/login/instagram/return', passport.authorize('instagram', { failureR
 
 router.post('/instagramQuery',function(req,res){
   query = req.body.query;
-  console.log(query);
   client.hgetall(req.sessionID, function (err, obj){
     if (err){
       var problem = {status: "Fail", err:err};
@@ -40,13 +39,10 @@ router.post('/instagramQuery',function(req,res){
       res.end();
     }
     else{
-        console.log(obj);
-		console.log(obj);
         var headers = {
             'Accept': 'application/json',
             'Content-Type':'application/json',
-            'twtaccesstokenkey':obj.instagram_AT,
-            'twtaccesstokensecret':obj.instagram_TS,
+            'instagramaccesstoken':obj.instagram
         }
       
         fetch('http://localhost:8080/graphql', {method:'POST',

@@ -57,7 +57,7 @@ const instagramQueryType = new GraphQLObjectType({
 	fields: () => ({
 		usersSelf : {
 			type: usersType,
-			resolve:(_, args) => instagram(args, "usersSelf")
+			resolve:(_, args,context) => instagram(context,args, "usersSelf")
 		},
 		users : {
 			type: usersType,
@@ -67,7 +67,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "User Id"
 				},
 			},
-			resolve:(_, args) => instagram(args, "users")
+			resolve:(_, args,context) => instagram(context,args, "users")
 		},
 		usersSearch : {
 			type: usersSearchType,
@@ -81,19 +81,19 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "Number of users to return"
 				}
 			},
-			resolve:(_, args) => instagram(args, "usersSearch")
+			resolve:(_, args,context) => instagram(context,args, "usersSearch")
 		},
 		usersSelfFollows: {
 			type: usersSelfFollowsType,
-			resolve:(_, args) => instagram(args, "usersSelfFollows")
+			resolve:(_, args,context) => instagram(context,args, "usersSelfFollows")
 		},
 		usersSelfFollowedBy:{
 			type: usersSelfFollowedByType,
-			resolve:(_, args) => instagram(args, "usersSelfFollowedBy")
+			resolve:(_, args,context) => instagram(context,args, "usersSelfFollowedBy")
 		},
 		usersSelfRequestedBy:{
 			type: usersSelfRequestedByType,
-			resolve:(_, args) => instagram(args, "usersSelfRequestedBy")
+			resolve:(_, args,context) => instagram(context,args, "usersSelfRequestedBy")
 		},
 		usersRelationship:{
 			type: usersRelationshipType,
@@ -103,7 +103,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "User Id"
 				}
 			},
-			resolve:(_, args) => instagram(args, "usersRelationship")
+			resolve:(_, args,context) => instagram(context,args, "usersRelationship")
 		},
 		mediaID:{
 			type: mediaIDType,
@@ -113,7 +113,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "Media ID"
 				}
 			},
-			resolve:(_, args) => instagram(args, "mediaID")
+			resolve:(_, args,context) => instagram(context,args, "mediaID")
 		},
 		mediaShortCode:{
 			type: mediaShortCodeType,
@@ -123,7 +123,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "Media Short Code"
 				}
 			},
-			resolve:(_, args) => instagram(args, "mediaShortCode")
+			resolve:(_, args,context) => instagram(context,args, "mediaShortCode")
 		},
 		mediaSearch:{
 			type: mediaSearchType,
@@ -137,7 +137,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "Media Search Longitude"
 				}
 			},
-			resolve:(_, args) => instagram(args, "mediaSearch")
+			resolve:(_, args,context) => instagram(context,args, "mediaSearch")
 		},
 		comments:{
 			type: commentsType,
@@ -147,7 +147,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "comments"
 				}
 			},
-			resolve:(_, args) => instagram(args, "comments")
+			resolve:(_, args,context) => instagram(context,args, "comments")
 		},
 		likes:{
 			type: likesType,
@@ -157,7 +157,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "likes"
 				}
 			},
-			resolve:(_, args) => instagram(args, "likes")
+			resolve:(_, args,context) => instagram(context,args, "likes")
 		},
 		tagName:{
 			type: tagNameType,
@@ -167,7 +167,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "tag name"
 				}
 			},
-			resolve:(_, args) => instagram(args, "tagName")
+			resolve:(_, args,context) => instagram(context,args, "tagName")
 		},
 		tagMediaRecent:{
 			type: tagMediaRecentType,
@@ -177,7 +177,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "tag name"
 				}
 			},
-			resolve:(_, args) => instagram(args, "tagMediaRecent")
+			resolve:(_, args,context) => instagram(context,args, "tagMediaRecent")
 		},
 		tagSearch:{
 			type: tagSearchType,
@@ -187,7 +187,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "query"
 				}
 			},
-			resolve:(_, args) => instagram(args, "tagSearch")
+			resolve:(_, args,context) => instagram(context,args, "tagSearch")
 		},
 		locationID:{
 			type: locationIDType,
@@ -197,7 +197,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "query"
 				}
 			},
-			resolve:(_, args) => instagram(args, "locationID")
+			resolve:(_, args,context) => instagram(context,args, "locationID")
 		},
 		locationMediaRecent:{
 			type: locationMediaRecentType,
@@ -207,7 +207,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "query"
 				}
 			},
-			resolve:(_, args) => instagram(args, "locationMediaRecent")
+			resolve:(_, args,context) => instagram(context,args, "locationMediaRecent")
 		},
 		locationSearch:{
 			type: locationSearchType,
@@ -221,7 +221,7 @@ const instagramQueryType = new GraphQLObjectType({
 					description: "longitude"
 				}
 			},
-			resolve:(_, args) => instagram(args, "locationSearch")
+			resolve:(_, args,context) => instagram(context,args, "locationSearch")
 		},
 	})
 })

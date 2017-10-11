@@ -26,10 +26,10 @@ const spotifyAlbumType = module.exports = new GraphQLObjectType({
 		uri:				{type:GraphQLString},
 		/*-----------------------full ------------------------*/
 		albumInfo:				{type:spotifyALbumInfoType,
-								resolve:({id}) => spotifyAPI(resolveName = 'getAlbum',id=id,args = {})},
+								resolve:({id},_,context) => spotifyAPI(context,resolveName = 'getAlbum',id=id,args = {})},
 		/*-----------------------nested--------------------------*/
 		tracks:				{type:new GraphQLList(spotifyTrackType),
-								resolve:({id}) => spotifyAPI(resolveName = 'getAlbumTracks', id=id, args = {})},
+								resolve:({id},_,context) => spotifyAPI(context,resolveName = 'getAlbumTracks', id=id, args = {})},
 	})
 });
 

@@ -25,7 +25,7 @@ const spotifyCategoryType = module.exports = new GraphQLObjectType({
 									limit:		{type:GraphQLInt, defaultValue:20},
 									offset:		{type:GraphQLInt, defaultValue:0},
 								},
-								resolve: ({id},args) => spotifyAPI(resolveName='categoryPlaylists',id=id,args = args)},
+								resolve: ({id},args,context) => spotifyAPI(context,resolveName='categoryPlaylists',id=id,args = args)},
 	})	
 });
 

@@ -25,16 +25,16 @@ const spotifyArtistType = module.exports = new GraphQLObjectType({
 		uri:			{type:GraphQLString},
 		/*--------------------------nested------------------------------*/
 		albums:			{type:new GraphQLList(spotifyAlbumType),
-							resolve:({id}) => spotifyAPI(resolveName = 'getArtistAlbums', id=id, args = {})},
+							resolve:({id},_,context) => spotifyAPI(context,resolveName = 'getArtistAlbums', id=id, args = {})},
 		topTracks:		{type:new GraphQLList(spotifyTrackType),
 							args:{
 								country:{type:GraphQLString,description:'country code',defaultValue:'US'}
 								},
-							resolve:({id},args) => spotifyAPI(resolveName = 'getArtistTopTracks',id = id, args = args)},
+							resolve:({id},args,context) => spotifyAPI(context,resolveName = 'getArtistTopTracks',id = id, args = args)},
 		relatedArtists:	{type:new GraphQLList(spotifyArtistType),
 							description:`Get Spotify catalog information about artists similar to a given artist. Similarity 
 							is based on analysis of the Spotify community’s listening history. Return up to 20 artists`,
-							resolve:({id}) => spotifyAPI(resolveName = 'getArtistRelatedArtists', id=id, args = {})},		
+							resolve:({id},_,context) => spotifyAPI(context,resolveName = 'getArtistRelatedArtists', id=id, args = {})},		
 	})
 });
 

@@ -25,7 +25,8 @@ passport.use(new Strategy({
 router.get('/login/flickr', passport.authorize('flickr'));
 router.get('/login/flickr/return', passport.authorize('flickr', { failureRedirect: '/home' }),
   function(req, res) {
-    client.hset(req.sessionID, 'flickr', req.account.token, redis.print);
+    client.hset(req.sessionID, 'flickr_AT', req.account.token, redis.print);
+	client.hset(req.sessionID, 'flickr_TS', req.account.tokenSecret, redis.print);
     res.send('<script>window.close()</script>');
   }
 );
@@ -40,8 +41,7 @@ router.post('/flickrQuery',function(req,res){
       res.end();
     }
     else{
-        console.log(obj.flickr_AT);
-		console.log(obj.flickr_TS);
+        console.log(obj);
         var headers = {
             'Accept': 'application/json',
             'Content-Type':'application/json',

@@ -35,7 +35,7 @@ const youtubeChannelType = module.exports = new GraphQLObjectType({
 														description:'show the comments matching this text pattern',
 														defaultValue:''},
 									},
-									resolve:({id},args)=>youtubeAPI(resolveName='channelCommentthread',id=id, args=args)},
+									resolve:({id},args,context)=>youtubeAPI(context,resolveName='channelCommentthread',id=id, args=args)},
 	})
 });
 

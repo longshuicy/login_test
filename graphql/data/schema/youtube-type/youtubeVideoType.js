@@ -33,7 +33,7 @@ const youtubeVideoType = module.exports = new GraphQLObjectType({
 										maxResults:{type:GraphQLInt},
 										searchTerms:{type:GraphQLString,description:'show the comments matching this text pattern'},
 									},
-									resolve:({id},args)=>youtubeAPI(resolveName='videoCommentthread',id=id, args=args)},
+									resolve:({id},args,context)=>youtubeAPI(context, resolveName='videoCommentthread',id=id, args=args)},
 	})
 });
 

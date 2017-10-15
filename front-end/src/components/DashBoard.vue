@@ -134,13 +134,14 @@
 		'reddit': false, 
 		'youtube': false, 
 		'tumblr': false,
-		'instagram':false},
+		'instagram':false,
+		'wikimedia':false,
+		'stackoverflow':false}
       }
     },
     computed: mapState({
       wikimedia: state=>state.wikimedia,
-      stackoverflow: state=>state.stackoverflow,
-      pinterest: state=>state.pinterest
+      stackoverflow: state=>state.stackoverflow
     }),
 
     methods: {
@@ -183,7 +184,7 @@
         this.mainClick('youtube');
       },
       pinClick() {
-        this.$store.commit('switchSoicalState', 'pinterest');
+        this.mainClick('pinterest');
       },
       tumblrClick() {
         this.mainClick('tumblr');

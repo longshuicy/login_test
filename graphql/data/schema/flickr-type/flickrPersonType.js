@@ -24,70 +24,70 @@ const flickrPersonType = module.exports = new GraphQLObjectType({
 							page: 		{type:GraphQLInt, defaultValue:1},
 							per_page:	{type:GraphQLInt, defaultValue:10},
 							sort: 		{type:GraphQLString, defaultValue:"interesting"}},
-						resolve:({nsid},args) => flickrAPI(endpoint="photos.getPopular",addon={"user_id":nsid},args=args,resolveName='popular')},
+						resolve:({nsid},args) => flickrAPI(resolveName='popular',addon={"user_id":nsid},args=args)},
 						
 		photoset:	{type:new GraphQLList(flickrPhotosetType),
 						description:'Returns the photosets belonging to the specified user.',
 						args: {
 							page: 		{type:GraphQLInt, defaultValue:1},
 							per_page:	{type:GraphQLInt, defaultValue:10}},
-						resolve: ({nsid},args) => flickrAPI(endpoint="photosets.getList",addon={"user_id":nsid},args=args,resolveName='photoset')},
+						resolve: ({nsid},args) => flickrAPI(resolveName='photoset',addon={"user_id":nsid},args=args)},
 						
 		profile:	{type: flickrProfileType,
-						resolve: ({nsid}) => flickrAPI(endpoint="profile.getProfile",addon={"user_id":nsid},args={},resolveName='profile')},
+						resolve: ({nsid}) => flickrAPI(resolveName='profile',addon={"user_id":nsid},args={})},
 						
 		groups:		{type: new GraphQLList(flickrGroupType),
 						description:'Returns the list of public groups a user is a member of.',
-						resolve:({nsid})=>flickrAPI(endpoint="people.getPublicGroups",addon={"user_id":nsid},args={},resolveName='group')},
+						resolve:({nsid})=>flickrAPI(resolveName='group',addon={"user_id":nsid},args={})},
 						
 		personInfo:	{type: flickrPersonInfoType,
-						resolve: ({nsid})=>flickrAPI(endpoint="people.getInfo",addon={"user_id":nsid},args={},resolveName='personInfo')},
+						resolve: ({nsid})=>flickrAPI(resolveName='personInfo',addon={"user_id":nsid},args={})},
 						
 		photos:		{type:new GraphQLList(flickrPhotoType),
 						description:'Get a list of public photos for the given user.',
 						args: {
 							page: 		{type:GraphQLInt, defaultValue:1},
 							per_page:	{type:GraphQLInt, defaultValue:10}},
-						resolve: ({nsid},args) => flickrAPI(endpoint="people.getPublicPhotos",addon={"user_id":nsid},args=args,resolveName='photo')},
+						resolve: ({nsid},args) => flickrAPI(resolveName='photo', addon={"user_id":nsid},args=args)},
 
 		photosOf:	{type:new GraphQLList(flickrPhotoType),
 						description:'Returns a list of photos containing a particular Flickr member.',
 						args: {
 							page: 		{type:GraphQLInt, defaultValue:1},
 							per_page:	{type:GraphQLInt, defaultValue:10}},
-						resolve: ({nsid},args) => flickrAPI(endpoint="people.getPhotosOf",addon={"user_id":nsid},args=args,resolveName='photoOf')},
+						resolve: ({nsid},args) => flickrAPI(resolveName='photoOf',addon={"user_id":nsid},args=args)},
 						
 		collectionTree:	{type: new GraphQLList(flickrSetType),
 							description:'Returns a tree (or sub tree) of collections belonging to a given user.',
-							resolve:({nsid})=>flickrAPI(endpoint="collections.getTree",addon={"user_id":nsid},args={},resolveName='tree')},
+							resolve:({nsid})=>flickrAPI(resolveName='tree',addon={"user_id":nsid},args={})},
 							
 		contacts:		{type: new GraphQLList(flickrPersonType),
 							args: {
 							page: 		{type:GraphQLInt, defaultValue:1},
 							per_page:	{type:GraphQLInt, defaultValue:10}},
-							resolve: ({nsid},args) => flickrAPI(endpoint="contacts.getPublicList",addon={"user_id":nsid},args=args,resolveName='contact')},
+							resolve: ({nsid},args) => flickrAPI(resolveName='contact',addon={"user_id":nsid},args=args)},
 						
 		favoritePhotos:	{type: new GraphQLList(flickrPhotoType),
 							args: {
 							page: 		{type:GraphQLInt, defaultValue:1},
 							per_page:	{type:GraphQLInt, defaultValue:10}},
-							resolve: ({nsid},args) => flickrAPI(endpoint="favorites.getPublicList",addon={"user_id":nsid},args=args,resolveName='favoritePhotos')},						
+							resolve: ({nsid},args) => flickrAPI(resolveName='favoritePhotos',addon={"user_id":nsid},args=args)},						
 						
 		gallaries:		{type: new GraphQLList(flickrGalleryType),
 							description:'Return the list of galleries created by a user. Sorted from newest to oldest.',
 							args: {
 							page: 		{type:GraphQLInt, defaultValue:1},
 							per_page:	{type:GraphQLInt, defaultValue:10}},
-							resolve: ({nsid},args) => flickrAPI(endpoint="galleries.getList",addon={"user_id":nsid},args=args,resolveName='gallery')},			
+							resolve: ({nsid},args) => flickrAPI(resolveName='gallery',addon={"user_id":nsid},args=args)},			
 						
 		tags:			{type: new GraphQLList(flickrTagType),
 							description:'Get the tag list for a given user (or the currently logged in user).',
-							resolve:({nsid})=>flickrAPI(endpoint="tags.getListUser",addon={"user_id":nsid},args={},resolveName='tagList')},	
+							resolve:({nsid})=>flickrAPI(resolveName='tagList',addon={"user_id":nsid},args={})},	
 						
 		popularTags:	{type: new GraphQLList(flickrTagType),
 							description:'Get the popular tags for a given user (or the currently logged in user).',
 							args:{count:{type:GraphQLInt}},
-							resolve:({nsid},args)=>flickrAPI(endpoint="tags.getListUserPopular",addon={"user_id":nsid},args=args,resolveName='popularTags')},	
+							resolve:({nsid},args)=>flickrAPI(resolveName='popularTags',addon={"user_id":nsid},args=args)},	
 													
 	})
 });

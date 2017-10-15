@@ -31,7 +31,7 @@ const tumblrQueryType = module.exports = new GraphQLObjectType({
 							},
 			},
 			description:'Get Posts with Tag',
-		resolve: (_,args) => tumblrAPI(resolveName='tagged', id='',args=args)
+		resolve: (_,args,context) => tumblrAPI(context, resolveName='tagged', id='',args=args)
 		},
 	})
 });

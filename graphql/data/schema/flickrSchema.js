@@ -135,7 +135,7 @@ min_date_taken and min_date_upload parameters — If no limiting factor is passe
 										defaultvalue:1,
 										description:`The page of results to return. If this argument is omitted, it defaults to 1.`}
 			},				
-		resolve: (_,args) => flickrAPI(endpoint="photos.search",addon = {},args = args, resolveName = "searchPhotos")},
+		resolve: (_,args,context) => flickrAPI(context,resolveName = "searchPhotos", addon = {},args = args)},
 		
 		queryGroup:{
 			type: new GraphQLList(flickrGroupType),
@@ -147,7 +147,7 @@ min_date_taken and min_date_upload parameters — If no limiting factor is passe
 					page:		{	type:GraphQLInt,
 									description:'The page of results to return. If this argument is ommited, it defaults to 1.'}
 				},
-			resolve: (_,args) => flickrAPI(endpoint="groups.search",addon ={}, args = args, resolveName = "searchGroups")},
+			resolve: (_,args,context) => flickrAPI(context, resolveName = "searchGroups",addon ={}, args = args)},
 			
 		recentPhotos:{
 			type: new GraphQLList(flickrPhotoType),
@@ -157,19 +157,7 @@ min_date_taken and min_date_upload parameters — If no limiting factor is passe
 					per_page: 	{type:GraphQLInt},
 					page:		{type:GraphQLInt}
 			},
-			resolve: (_,args) => flickrAPI(endpoint="photos.getRecent", addon={}, args=args, resolveName = "recentPhotos")},
-	
-		interestingPhotos:{
-			type: new GraphQLList(flickrPhotoType),
-			description:'Returns the list of interesting photos for the most recent day or a user-specified date.',
-			args:{
-				date: 		{type: GraphQLString,
-								description:'A specific date, formatted as YYYY-MM-DD, to return interesting photos for.'},
-				extras: 	{type:GraphQLString},
-				per_page: 	{type:GraphQLInt},
-				page:		{type:GraphQLInt}				
-			},
-			resolve: (_,args) => flickrAPI(endpoint="interestingness.getList", addon={}, args=args, resolveName = "interestingPhotos")},
+			resolve: (_,args,context) => flickrAPI(context,resolveName = "recentPhotos", addon={}, args=args)},
 			
 		queryPlace:{
 			type: new GraphQLList(flickrPlaceType),
@@ -180,7 +168,7 @@ that contains the address rather than the street, or building, itself.`,
 			args:{
 					query:{type:GraphQLString}
 			},
-			resolve: (_,args) => flickrAPI(endpoint="places.find", addon={},args=args,resolveName="searchPlaces")},
+			resolve: (_,args,context) => flickrAPI(context,resolveName="searchPlaces", addon={},args=args)},
 			
 		queryPlaceBoundingBox:{
 			type: new GraphQLList(flickrPlaceType),
@@ -198,7 +186,7 @@ locality: 7km (4.3mi), county: 50km (31mi), region: 200km (124mi), country: 500k
 												Valid place type IDs are :22: neighbourhood, 7: locality, 8: region,
 												12: country,29: continent`}
 			},
-			resolve: (_,args) => flickrAPI(endpoint="places.placesForBoundingBox", addon={}, args=args,resolveName="boundingBox")},
+			resolve: (_,args,context) => flickrAPI(context,resolveName="boundingBox", addon={}, args=args)},
 			
 		topPlaces:{
 			type: new GraphQLList(flickrPlaceType),
@@ -212,13 +200,13 @@ locality: 7km (4.3mi), county: 50km (31mi), region: 200km (124mi), country: 500k
 					woe_id:			{type:GraphQLString},
 					place_id:		{type:GraphQLString}
 			},
-			resolve: (_,args) => flickrAPI(endpoint="places.getTopPlacesList",addon={},args=args,resolveName="topPlaces")},
+			resolve: (_,args,context) => flickrAPI(context,resolveName="topPlaces",addon={},args=args)},
 		
 		queryUser:{
 			type: flickrPersonType,
 			description:'Return a user\'s NSID, given their username.',
 			args:{username:{type:GraphQLString}},
-			resolve: (_,args) => flickrAPI(endpoint="people.findByUsername", addon={}, args=args, resolveName="searchUsers")},
+			resolve: (_,args,context) => flickrAPI(context,resolveName="searchUsers", addon={}, args=args)},
 		
 		hotTags:{
 			type: new GraphQLList(flickrTagType),
@@ -230,7 +218,7 @@ locality: 7km (4.3mi), county: 50km (31mi), region: 200km (124mi), country: 500k
 				count:{
 					type:GraphQLInt, 
 					description:'The number of tags to return. Defaults to 20. Maximum allowed value is 200.'}},
-				resolve: (_,args)=> flickrAPI(endpoint="tags.getHotList",addon={},args=args,resolveName="hotTags")},
+				resolve: (_,args,context)=> flickrAPI(context,resolveName="hotTags", addon={},args=args)},
 	})
 });
 

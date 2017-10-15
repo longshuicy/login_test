@@ -30,11 +30,11 @@ const youtubeInfoType = new GraphQLObjectType({
 		playlistId:	{type:GraphQLString},
 		/*---------------nested--------------*/
 		videoInfo:		{type:new GraphQLList(youtubeVideoType),
-							resolve:({videoId}) => youtubeAPI(resolveName='video',id=videoId, args={})},
+							resolve:({videoId},_,context) => youtubeAPI(context, resolveName='video',id=videoId, args={})},
 		channelInfo:	{type:new GraphQLList(youtubeChannelType),
-							resolve:({channelId}) => youtubeAPI(resolveName='channel',id=channelId, args={})},
+							resolve:({channelId},_,context) => youtubeAPI(context,resolveName='channel',id=channelId, args={})},
 		playlistInfo:	{type:new GraphQLList(youtubePlaylistType),
-							resolve: ({playlistId}) => youtubeAPI(resolveName='playlist',id=playlistId, args={})},	
+							resolve: ({playlistId},_,context) => youtubeAPI(context,resolveName='playlist',id=playlistId, args={})},	
 	})
 });
 

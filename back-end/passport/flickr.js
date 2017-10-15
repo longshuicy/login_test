@@ -45,8 +45,8 @@ router.post('/flickrQuery',function(req,res){
         var headers = {
             'Accept': 'application/json',
             'Content-Type':'application/json',
-            'twtaccesstokenkey':obj.flickr_AT,
-            'twtaccesstokensecret':obj.flickr_TS,
+            'flickraccesstokenkey':obj.flickr_AT,
+            'flickraccesstokensecret':obj.flickr_TS,
         }
       
         fetch('http://localhost:8080/graphql', {method:'POST',

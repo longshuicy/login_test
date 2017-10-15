@@ -2,23 +2,20 @@ require('dotenv').config();
 var Promise = require('promise');
 var google = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
-var oauth2Client = new OAuth2(
-  process.env.YOUTUBE_CLIENT_ID,
-  process.env.YOUTUBE_CLIENT_SECRET,
-  process.env.CALLBACK_URL
-);
+var oauth2Client = new OAuth2();
 
-oauth2Client.setCredentials({
-  access_token: process.env.YOUTUBE_ACCESS_TOKEN,
-  refresh_token: process.env.YOUTUBE_REFRESH_TOKEN
-});
+function youtubeAPI(token, resolveName, id, args){
+	
+	oauth2Client.setCredentials({
+	  access_token: token.youtubeaccesstoken,
+	  refresh_token: token.youtuberefreshtoken
+	});
 
-var youtube = google.youtube({
-	version: 'v3',
-	auth:oauth2Client
-});
-
-function youtubeAPI(resolveName, id, args){
+	var youtube = google.youtube({
+		version: 'v3',
+		auth:oauth2Client
+	});
+	
 	return new Promise((resolve,reject) =>{
 		
 		switch(resolveName){
@@ -26,7 +23,6 @@ function youtubeAPI(resolveName, id, args){
 				console.log(args)
 				youtube.search.list({
 					part: 				'id,snippet',
-					key: 				config.youtube.api_key,
 					maxResults:			args['maxResults'],
 					order:				args['order'],
 					publishedAfter:		args['publishedAfter'],

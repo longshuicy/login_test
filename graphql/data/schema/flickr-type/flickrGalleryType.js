@@ -33,7 +33,7 @@ const flickrGalleryType = module.exports = new GraphQLObjectType({
 									args: {
 											page: 		{type:GraphQLInt, defaultvalue:1},
 											per_page:	{type:GraphQLInt, defaultvalue:10}},
-									resolve: ({id},args) => flickrAPI(endpoint="galleries.getPhotos", addon ={"gallery_id":id},args=args,resolveName="photosInGallery")},
+									resolve: ({id},args) => flickrAPI(resolveName="photosInGallery", addon ={"gallery_id":id},args=args)},
 		})
 });
 

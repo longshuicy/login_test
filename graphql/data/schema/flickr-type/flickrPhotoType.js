@@ -26,23 +26,23 @@ const flickrPhotoType = module.exports = new GraphQLObjectType({
 		isfamily:	{type:GraphQLInt },
 		/*------------------nested---------------------*/
 		streamContext: 	{type:flickrContextType,
-							resolve:({id}) => flickrAPI(endpoint="photos.getContext",addon={"photo_id": id},args={},resolveName="streamContext")},
+							resolve:({id}) => flickrAPI(resolveName="streamContext",addon={"photo_id": id},args={})},
 		//setContext:	{type:flickrContextType,
 		//				resolve:({id}) => flickrGeneric(endpoint="photosets.getContext", addon={"photo_id": id},args={})},
 		Exif:		{type:new GraphQLList(flickrExifType),
-						resolve:({id}) => flickrAPI(endpoint="photos.getExif",addon={"photo_id": id},args={},resolveName="exif")},
+						resolve:({id}) => flickrAPI(resolveName="exif",addon={"photo_id": id},args={})},
 						
 		favoritePeople:	{type:new GraphQLList(flickrPersonType),
-						resolve:({id}) => flickrAPI(endpoint="photos.getFavorites",addon={"photo_id": id},args={},resolveName="favoritePeople")},
+						resolve:({id}) => flickrAPI(resolveName="favoritePeople",addon={"photo_id": id},args={})},
 						
 		people:		{type:new GraphQLList(flickrPersonType),
-						resolve:({id}) => flickrAPI(endpoint="photos.people.getList",addon={"photo_id": id},args={},resolveName="people")},
+						resolve:({id}) => flickrAPI(resolveName="people",addon={"photo_id": id},args={})},
 						
 		info:		{type:flickrPhotoInfoType,
-						resolve: ({id})=> flickrAPI(endpoint="photos.getInfo",addon={"photo_id": id},args={},resolveName="photoInfo")},
+						resolve: ({id})=> flickrAPI(resolveName="photoInfo",addon={"photo_id": id},args={})},
 						
 		size:		{type:new GraphQLList(flickrSizeType),
-						resolve: ({id}) => flickrAPI(endpoint="photos.getSizes",addon={"photo_id": id},args={},resolveName="size")},
+						resolve: ({id}) => flickrAPI(resolveName="size",addon={"photo_id": id},args={})},
 						
 		comments:	{type:new GraphQLList(flickrCommentType),
 						args:{
@@ -55,17 +55,17 @@ const flickrPhotoType = module.exports = new GraphQLObjectType({
 								description:'Maximum date that a a comment was added. The date should be in the form of a unix timestamp.'
 							}
 						},
-						resolve:({id},args) => flickrAPI(endpoint="photos.comments.getList", addon={"photo_id":id},args=args,resolveName="comments")},
+						resolve:({id},args) => flickrAPI(resolveName="comments", addon={"photo_id":id},args=args)},
 						
 		locations:	{type: flickrLocationType,
-						resolve:({id}) => flickrAPI(endpoint="photos.geo.getLocation", addon={"photo_id":id},args={},resolveName="locations")},
+						resolve:({id}) => flickrAPI(resolveName="locations", addon={"photo_id":id},args={})},
 						
 		galleriesOf:		{type: new GraphQLList(flickrGalleryType),
 							description:'Return the list of galleries to which a photo has been added. Galleries are returned sorted by date which the photo was added to the gallery.',
 							args: {
 							page: 		{type:GraphQLInt, defaultValue:1},
 							per_page:	{type:GraphQLInt, defaultValue:10}},
-						resolve: ({id},args) => flickrAPI(endpoint = "galleries.getListForPhoto", addon = {"photo_id":id}, args = args,resolveName='galleriesOf')},
+						resolve: ({id},args) => flickrAPI(resolveName='galleriesOf', addon = {"photo_id":id}, args = args)},
 	})
 });
 

@@ -1,153 +1,485 @@
 require('dotenv').config();
 var Promise = require('promise');
-var Flickr = require("node-flickr")
+var Flickr = require("flickr-sdk")
 
-function flickrAPI(endpoint,addon,args,resolveName){
+function flickrAPI(token, resolveName,addon,args){
 	
-	var flickr = new Flickr(Flickr.OAuth.createPlugin(
+	var oauth = new Flickr.OAuth(
 		process.env.FLICKR_CONSUMER_KEY,
-		process.env.FLICKR_CONSUMER_SECRET,
-		'72157682112043746-7c07f3e7bbe1d9cd',
-		'87fc0dc9c7b2b9f9'
+		process.env.FLICKR_CONSUMER_SECRET
+	);
+	var flickr = new Flickr(oauth.plugin(
+		token.flickraccesstokenkey,
+		token.flickraccesstokensecret
 	));
 	
 	Object.assign(args,addon);
 	return new Promise((resolve,reject) =>{
-		flickr.get(endpoint, args, function(err, result){
-			if (err) {
-				console.error(err);
-				reject(err);
-			}else{
-				switch(resolveName){
-					case 'searchPhotos':
-					case 'recentPhotos':
-					case 'interestingPhotos':
-					case 'popular':
-					case 'photo':
-					case 'photoOf':
-					case 'favoritePhotos':
-						resolve(result.photos.photo);
-						break;
+		
+		switch(resolveName){
+			case 'searchPhotos':
+				flickr.photos.search(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['photos']['photo']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+			
+			case 'recentPhotos':
+				//console.log(args);
+				flickr.photos.getRecent(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['photos']['photo']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+			
+			case 'popular':
+				flickr.photos.getPopular(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['photos']['photo']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'favoritePhotos':
+				flickr.favorites.getPublicList(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['photos']['photo']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'searchGroups':
+				flickr.groups.search(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['groups']['group']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'searchPlaces':
+				flickr.places.find(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['places']['place']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'boundingBox':
+				flickr.places.placesForBoundingBox(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['places']['place']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'topPlaces':	
+				flickr.places.getTopPlacesList(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['places']['place']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+			
+			case'searchUsers':
+				flickr.people.findByUsername(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['user']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'hotTags':
+				flickr.tags.getHotList(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['hottags']['tag']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'photosInSet':
+				flickr.photosets.getPhotos(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['photoset']['photo']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'photoset':
+				flickr.photosets.getList(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['photosets']['photoset']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'photosetComments':
+				flickr.photosets.comments.getList(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['comments']['comment']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'comments':
+				flickr.photos.comments.getList(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['comments']['comment']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'photosInGallery':
+				flickr.galleries.getPhotos(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['galleries']['gallery']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+			
+			case 'photo':
+				flickr.people.getPublicPhotos(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['photos']['photo']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;s
+			
+			case 'photoOf':
+				flickr.people.getPhotosOf(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['photos']['photo']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'groupInfo':
+				flickr.groups.getInfo(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['group']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+			
+			case 'topics':
+				flickr.groups.discuss.topics.getList(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['topics']['topic']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+					
+			case 'profile':
+				flickr.profile.getProfile(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['profile']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'group':
+				flickr.people.getPublicGroups(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['groups']['group']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+			
+			case 'personInfo':
+				flickr.people.getInfo(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['person']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
 						
-					case 'searchGroups':
-					case 'group':
-						resolve(result.groups.group);
-						break;
-						
-					case 'searchPlaces':
-					case 'boundingBox':
-					case 'topPlaces':
-						resolve(result.places.place);
-						break;
-						
-					case'searchUsers':
-						resolve(result.user);
-						break;
-					
-					case 'hotTags':
-						resolve(result.hottags.tag);
-						break;
-						
-					case 'photosInSet':
-						resolve(result.photoset.photo);
-						break;
-						
-					case 'photoset':
-						resolve(result.photosets.photoset);
-						break;
-					
-					case 'photosetComments':
-					case 'comments':
-						resolve(result.comments.comment);
-						break;
-						
-					case 'photosInGallery':
-					case 'gallery':
-					case 'galleriesOf':
-						//console.log(JSON.stringify(result));
-						resolve(result.galleries.gallery);
-						break;
-						
-					case 'groupInfo':
-						resolve(result.group);
-						break;
-						
-					case 'topics':
-						resolve(result.topics.topic);
-						break;
-					
-					case 'placeInfo':
-						resolve(result.place);
-						break;
-						
-					case 'tagClusters':
-						resolve(result.clusters.cluster);
-						break;
-						
-					case 'relatedTags':
-						resolve(result.tags.tag);
-						break;
-					
-					case 'profile':
-						resolve(result.profile);
-						break;
-					
-					case 'personInfo':
-						//console.log(result.person);
-						resolve(result.person);
-						break;
-					
-					case 'tree':
-						//console.log(JSON.stringify(result));
-						resolve(result.collections.collection);
-						break;
-					
-					case 'contact':
-						resolve(result.contacts.contact);
-						break;
-					
-					case 'tagList':
-					case 'popularTags':
-						resolve(result.who.tags.tag);
-						break;
-						
-					case 'streamContext':
-						resolve(result);
-						break;
-					
-					case 'exif':
-						resolve(result.photo.exif);
-						break;
-						
-					case 'favoritePeople':
-						//console.log(JSON.stringify(result));
-						resolve(result.photo.person);
-						break;
-					
-					case 'people':
-						//console.log(JSON.stringify(result));
-						resolve(result.people.person);
-						break;
-					
-					case 'photoInfo':
-						resolve(result.photo);
-						break;
-					
-					case 'size':
-						resolve(result.sizes.size);
-						break;
-					
-					case 'locations':
-						resolve(result.photo.location);
-						break;
+			case 'tree':
+				flickr.collections.getTree(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['collections']['collection']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+			
+			case 'contact':
+				flickr.contacts.getPublicList(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['contacts']['contact']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+			
+			case 'gallery':		
+				flickr.galleries.getList(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['galleries']['gallery']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'tagList':
+				flickr.tags.getListUser(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['who']['tags']['tag']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'popularTags':
+				flickr.tags.getListUserPopular(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['who']['tags']['tag']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'streamContext':
+				flickr.photos.getContext(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'exif':
+				flickr.photos.getExif(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['photo']['exif']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'favoritePeople':
+				flickr.photos.getFavorites(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['photo']['person']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+										
+				
+			case 'people':
+				flickr.photos.people.getList(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['people']['person']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+			
+				
+			case 'photoInfo':
+				flickr.photos.getInfo(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['photo']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+			
+			
+			case 'size':
+				flickr.photos.getSizes(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['sizes']['size']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
 									
-					default:
-						console.log('sorry we can\'t find matching resolve type:' + resolveName);
-						resolve(null);
-						}						
+			case 'locations':
+				flickr.photos.geo.getLocation(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['photo']['location']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+			
+			case 'galleriesOf':
+				flickr.galleries.getListForPhoto(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['galleries']['gallery']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'placeInfo':
+				flickr.places.getInfo(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['place']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'tagClusters':
+				flickr.tags.getClusters(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['clusters']['cluster']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+				
+			case 'relatedTags':
+				flickr.tags.getRelated(args).then(function(response){
+					return response.text;
+				}).then(function(responseBody){
+					var responseJson = JSON.parse(responseBody);
+					resolve(responseJson['tags']['tag']);
+				}).catch(function(err){
+					console.log(err);
+					reject(err);
+				})
+				break;
+								
+									
 			}
-		});
-	});		
+		});	
 }
 
 module.exports = flickrAPI;

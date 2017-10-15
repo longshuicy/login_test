@@ -49,7 +49,7 @@ const tumblrBlogType = module.exports = new GraphQLObjectType({
 		
 		/*---------------------------------nested-----------------------------------*/
 		info:				{type:tumblrBlogInfoType,
-								resolve:({blog_name})=>tumblrAPI(resolveName='blogInfo',id=blog_name,args={})},
+								resolve:({blog_name},_,context)=>tumblrAPI(context,resolveName='blogInfo',id=blog_name,args={})},
 		// careful, some return API error 403
 		likes:				{type:new GraphQLList(tumblrBlogType),
 								description:'This method can be used to retrieve the publicly exposed likes from a blog.',
@@ -64,7 +64,7 @@ const tumblrBlogType = module.exports = new GraphQLObjectType({
 									after:	{type:GraphQLString,
 												description:'Retrieve posts liked after the specified timestamp'},
 								},
-								resolve: ({blog_name},args) =>tumblrAPI(resolveName='blogLikes',id=blog_name,args=args)},
+								resolve: ({blog_name},args,context) =>tumblrAPI(context, resolveName='blogLikes',id=blog_name,args=args)},
 		posts:				{type:new GraphQLList(tumblrPostType),
 								description:'Retrieve published posts for a blog',
 								args:{
@@ -84,7 +84,7 @@ const tumblrBlogType = module.exports = new GraphQLObjectType({
 									fliter:			{type:GraphQLString,
 														description:'choose between text, html, text, raw'}
 									},
-								resolve:({blog_name},args) =>tumblrAPI(resolveName='blogPosts',id=blog_name,args=args)
+								resolve:({blog_name},args,context) =>tumblrAPI(context,resolveName='blogPosts',id=blog_name,args=args)
 							},
 	})
 });

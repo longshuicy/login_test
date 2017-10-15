@@ -44,7 +44,7 @@ like a video, it does not have its own persistent data.`,
 										defaultValue:'playlist',
 										description:'channel, playlist,video'}
 			},
-			resolve:(_, args) => youtubeAPI(resolveName='search',id='', args=args)
+			resolve:(_, args,context) => youtubeAPI(context, resolveName='search',id='', args=args)
 		}
 	})
 });

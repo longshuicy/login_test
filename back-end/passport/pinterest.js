@@ -1,6 +1,6 @@
 var express = require('express');
 var passport = require('passport');
-var Strategy = require('passport-tumblr').Strategy;
+var Strategy = require('passport-pinterest').Strategy;
 var router = express.Router();
 var config = require('../config.js');
 var redis = require('redis');
@@ -12,26 +12,29 @@ client.on('error', function (err) {
 });
 
 passport.use(new Strategy({
-    consumerKey: config.tumblr.consumer_key,
-    consumerSecret: config.tumblr.consumer_secret,
-    callbackURL: 'http://localhost:3000/login/tumblr/return'
+	clientID: config.pinterest.client_id,
+    clientSecret: config.pinterest.client_secret,
+	scope: ['read_public', 'read_relationships'],
+    callbackURL: 'http://localhost:3000/login/pinterest/return'
   },
-  function(token, tokenSecret, profile, cb) {
-    profile.token = token;
-    profile.tokenSecret = tokenSecret;
+  function(accessToken, refreshToken, profile, cb) {
+    profile.accessToken = accessToken;
+    profile.refreshToken = refreshToken;
+	console.log(accessToken);
+	console.log(refreshToken);
     return cb(null,profile);
   }));
 
-router.get('/login/tumblr', passport.authorize('tumblr'));
-router.get('/login/tumblr/return', passport.authorize('tumblr', { failureRedirect: '/home' }),
+router.get('/login/pinterest', passport.authorize('pinterest'));
+router.get('/login/pinterest/return', passport.authorize('pinterest', { failureRedirect: '/home' }),
   function(req, res) {
-    client.hset(req.sessionID, 'tumblr_token', req.account.token, redis.print);
-    client.hset(req.sessionID, 'tumblr_tokenSecret', req.account.tokenSecret, redis.print);
+    client.hset(req.sessionID, 'pinterest_accessToken', req.account.accessToken, redis.print);
+    client.hset(req.sessionID, 'pinterest_refreshToken', req.account.refreshToken, redis.print);
     res.send('<script>window.close()</script>');
   }
 );
 
-router.post('/tumblrQuery',function(req,res){
+router.post('/pinterestQuery',function(req,res){
   query = req.body.query;
   client.hgetall(req.sessionID, function (err, obj){
     if (err){
@@ -40,12 +43,11 @@ router.post('/tumblrQuery',function(req,res){
       res.end();
     }
     else{
-        //console.log(obj);
         var headers = {
             'Accept': 'application/json',
             'Content-Type':'application/json',
-            'tumblrtoken':obj.tumblr_token,
-			'tumblrtokensecret':obj.tumblr_tokenSecret
+            //'tumblrtoken':obj.tumblr_token,
+			//'tumblrtokensecret':obj.tumblr_tokenSecret
         }
        
         fetch('http://localhost:8080/graphql', {method:'POST',

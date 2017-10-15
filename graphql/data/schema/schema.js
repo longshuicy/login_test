@@ -55,6 +55,14 @@ const Query = new GraphQLObjectType({
 		instagram: {
 			type: instagramQueryType,
 			resolve: () => wrapper()
+		},
+		tumblr: {
+			type: tumblrQueryType,
+			resolve: () => wrapper()
+		},
+		youtube: {
+			type: youtubeQueryType,
+			resolve: () => wrapper()
 		}
 	})
 });

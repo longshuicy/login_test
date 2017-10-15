@@ -7,8 +7,13 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitTwitter()">Submit for Twitter</button>
         <button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitReddit()">Submit for Reddit</button>
 		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitSpotify()">Submit for Spotify</button>
-		<!-- button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitFlickr()">Submit for Flickr</button -->
 		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitInstagram()">Submit for Instagram</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitFlickr()">Submit for Flickr</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitFacebook()">Submit for Facebook</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitYoutube()">Submit for Youtube</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitPinterest()">Submit for Pinterest</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" @click = "submitTumblr()">Submit for Tumblr</button>
+		
     </form>
   </div>
 </template>
@@ -63,13 +68,15 @@ export default {
          s: null,
          str: null,
 
-         loginArray: {'facebook': false, 'twitter': false, 'flickr': false, 'spotify': false, 'reddit': false, 'youtube': false, 'tumblr': false},
-
          query_string_twitter: `{twitter {queryUser(q: \"bill\", count: 4, pageNum: 1) {author_id, profile_image_url}}}`,
          query_string_reddit: `{reddit{searchSubredditNames(query:"uiuc")}}`,
 		 query_string_spotify:`{spotify {searchArtists(q:"Jay-z",limit:1) {href,id,name,type,uri }}}`,
 		 query_string_flickr: `{flickr{recentPhotos(extras:"0",per_page:10,page:1){id,title}}}`,
 		 query_string_instagram:`{instagram{usersSelf{data{id, username, full_name, profile_picture}}}}`,
+		 query_string_facebook:``,
+		 query_string_pinterest:``,
+		 query_string_youtube:`{youtube {search(q: "panda", maxResults: 5, type: "video") {snippet {title,description}}}}`,
+		 query_string_tumblr:`{tumblr {searchPosts(tag: "science", limit: 5) {type,post_url,summary}}}`
       }
     },
 
@@ -122,6 +129,50 @@ export default {
         },
 		submitInstagram(){
 			this.$http.post('http://localhost:3000/instagramQuery',{query: this.query_string_instagram}).then(response=>{
+                if (response.body.status == 'OK'){
+                    alert(response.body.answer);
+                    console.log(response.body.answer);
+                }
+                else{
+                    alert("Looks like there is something wrong, try again!");
+                }
+            });
+        },
+		submitFacebook(){
+			this.$http.post('http://localhost:3000/facebookQuery',{ query: this.query_string_facebook}).then(response=>{
+                if (response.body.status == 'OK'){
+                    alert(response.body.answer);
+                    console.log(response.body.answer);
+                }
+                else{
+                    alert("Looks like there is something wrong, try again!");
+                }
+            });
+        },
+		submitPinterest(){
+			this.$http.post('http://localhost:3000/pinterestQuery',{query: this.query_string_pinterest}).then(response=>{
+                if (response.body.status == 'OK'){
+                    alert(response.body.answer);
+                    console.log(response.body.answer);
+                }
+                else{
+                    alert("Looks like there is something wrong, try again!");
+                }
+            });
+        },
+		submitYoutube(){
+			this.$http.post('http://localhost:3000/youtubeQuery',{query: this.query_string_youtube}).then(response=>{
+                if (response.body.status == 'OK'){
+                    alert(response.body.answer);
+                    console.log(response.body.answer);
+                }
+                else{
+                    alert("Looks like there is something wrong, try again!");
+                }
+            });
+        },
+		submitTumblr(){
+			this.$http.post('http://localhost:3000/tumblrQuery',{query: this.query_string_tumblr}).then(response=>{
                 if (response.body.status == 'OK'){
                     alert(response.body.answer);
                     console.log(response.body.answer);

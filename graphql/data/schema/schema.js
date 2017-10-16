@@ -63,6 +63,10 @@ const Query = new GraphQLObjectType({
 		youtube: {
 			type: youtubeQueryType,
 			resolve: () => wrapper()
+		},
+		facebook: {
+			type: facebookQueryType,
+			resolve: () => wrapper()
 		}
 	})
 });

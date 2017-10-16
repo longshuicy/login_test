@@ -6,8 +6,6 @@ var {
 	GraphQLInt,
 	GraphQLFloat
 } = require('graphql');
-var getField = require('../../../API/fbAPI').getField;
-var getEdge = require('../../../API/fbAPI').getEdge;
 
 const fbThumbnailType = module.exports = new GraphQLObjectType({
 	name: 'fbThumbnail',

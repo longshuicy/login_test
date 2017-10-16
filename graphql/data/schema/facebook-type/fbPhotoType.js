@@ -5,8 +5,7 @@ var {
 	GraphQLInt,
 	GraphQLFloat
 } = require('graphql');
-var getField = require('../../../API/fbAPI').getField;
-var getEdge = require('../../../API/fbAPI').getEdge;
+var facebookAPI = require('../../../API/fbAPI');
 
 const fbPhotoType = module.exports = new GraphQLObjectType({
 	name: 'fbPhoto',
@@ -16,51 +15,51 @@ const fbPhotoType = module.exports = new GraphQLObjectType({
 		name: 			{ type: GraphQLString },
 		created_time:	{ type: GraphQLString },
 		backdated_time:	{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'backdated_time')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'backdated_time')},
 		height:			{ type: GraphQLInt,
-							resolve: ({id}) => getField({id},'height')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'height')},
 		width:			{ type: GraphQLInt,
-							resolve: ({id}) => getField({id},'width')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'width')},
 		icon: 			{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'icon')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'icon')},
 		link:			{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'link')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'link')},
 		page_story_id:	{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'page_story_id')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'page_story_id')},
 		picture:		{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'picture')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'picture')},
 		updated_time:	{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'updated_time')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'updated_time')},
 		backdated_time_granularity:	{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'backdated_time_granularity')},	
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'backdated_time_granularity')},	
 
 		images:			{ type: new GraphQLList(fbPlatformImageSourceType),
-							resolve: ({id}) => getField({id},'images')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'images')},
 		name_tags: 		{ type: new GraphQLList(fbEntityAtTextRangeType),
-							resolve: ({id}) => getField({id},'name_tags')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'name_tags')},
 		webp_images:	{ type: new GraphQLList(fbPlatformImageSourceType),
-							resolve: ({id}) => getField({id},'webp_images')},	
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'webp_images')},	
 		album: 			{ type: fbAlbumType,
-							resolve: ({id}) => getField({id},'album')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'album')},
 		from:			{ type: fbProfileType,
-							resolve: ({id}) => getField({id},'from')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'from')},
 		event: 			{ type: fbEventType,
-							resovle: ({id}) => getField({id},'event')},
+							resovle: ({id},_,context) => facebookAPI(context,'getField',{id},'event')},
 		place:			{ type: fbPlaceType,
-							resolve: ({id}) => getField({id},'place')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'place')},
 		/*-------------------------- edges ---------------------------------- */
 		reactions:		{ type: new GraphQLList(fbReactionType),
-								resolve: ({id}) => getEdge({id},'reactions')},
+								resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'reactions')},
 		sharedposts:	{ type: new GraphQLList(fbPostType),
-								resolve: ({id}) => getEdge({id},'sharedposts')},
+								resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'sharedposts')},
 		sponsor_tags:	{ type: new GraphQLList(fbPageType),
-								resolve: ({id}) => getEdge({id},'sponsor_tags')},
+								resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'sponsor_tags')},
 		tags:			{ type: new GraphQLList(fbTaggableSubjectType),
-								resolve: ({id}) => getEdge({id},'tags')},
+								resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'tags')},
 		likes:			{ type: new GraphQLList(fbLikeType),
-								resolve: ({id}) => getEdge({id},'likes')},
+								resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'likes')},
 		comments:		{ type: new GraphQLList(fbCommentType),
-							resolve: ({id}) => getEdge({id},'comments')}
+							resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'comments')}
 	})
 });
 		

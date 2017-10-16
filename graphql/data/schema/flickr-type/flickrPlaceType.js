@@ -26,7 +26,7 @@ const flickrPlaceType = module.exports = new GraphQLObjectType({
 		
 		/*---------------------nested------------------*/
 		placeInfo:		{type:flickrPlaceInfoType,
-							resolve:({place_id})=>flickrAPI(resolveName="placeInfo",addon={"place_id":place_id},args={})},
+							resolve:({place_id},_,context)=>flickrAPI(context,resolveName="placeInfo",addon={"place_id":place_id},args={})},
 	})
 });
 

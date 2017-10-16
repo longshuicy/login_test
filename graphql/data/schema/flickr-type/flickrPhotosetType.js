@@ -32,9 +32,9 @@ const flickrPhotosetType = module.exports = new GraphQLObjectType({
 		
 		/*--------------------nested-------------------*/
 		photos:			{type:new GraphQLList(flickrPhotoType),
-							resolve:({id})=> flickrAPI(resolveName="photosInSet",addon={"photoset_id":id},args={})},
+							resolve:({id},_,context)=> flickrAPI(context,resolveName="photosInSet",addon={"photoset_id":id},args={})},
 		comments:		{type:new GraphQLList(flickrCommentType),
-							resolve:({id})=> flickrAPI(resolveName="photosetComments",addon={"photoset_id":id},args={})},
+							resolve:({id},_,context)=> flickrAPI(context,resolveName="photosetComments",addon={"photoset_id":id},args={})},
 	})
 });
 

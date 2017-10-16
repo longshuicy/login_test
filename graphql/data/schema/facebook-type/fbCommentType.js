@@ -6,8 +6,7 @@ var {
 	GraphQLInt,
 	GraphQLFloat
 } = require('graphql');
-var getField = require('../../../API/fbAPI').getField;
-var getEdge = require('../../../API/fbAPI').getEdge;
+var facebookAPI = require('../../../API/fbAPI');
 
 const fbCommentType = module.exports = new GraphQLObjectType({
 	name:'fbComment',
@@ -19,24 +18,24 @@ const fbCommentType = module.exports = new GraphQLObjectType({
 		/*-----------------------------------fields------------------------------*/
 		id:				{ type: GraphQLString},
 		attachment:		{ type: fbAttachmentType,
-							resolve: ({id}) => getField({id},'attachment')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'attachment')},
 		comment_count:	{ type: GraphQLInt,
-							resolve: ({id}) => getField({id},'comment_count')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'comment_count')},
 		created_time:	{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'created_time')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'created_time')},
 		from:			{ type: fbProfileType,
-							resolve: ({id}) => getField({id},'from')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'from')},
 		like_count:		{ type: GraphQLInt,
-							resolve: ({id}) => getField({id},'like_count')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'like_count')},
 		message:		{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'message')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'message')},
 		parent:			{ type: fbCommentType,
-							resolve: ({id}) => getField({id},'parent')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'parent')},
 		/*----------------------------------edges-------------------------------*/
 		likes:			{ type: new GraphQLList(fbLikeType),	
-								resolve: ({id}) => getEdge({id},'likes')},
+								resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'likes')},
 		comments:		{ type: new GraphQLList(fbCommentType),
-								resolve: ({id}) => getEdge({id},'comments')}
+								resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'comments')}
 	})
 });
 

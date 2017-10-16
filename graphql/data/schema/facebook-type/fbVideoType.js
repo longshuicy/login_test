@@ -6,8 +6,7 @@ var {
 	GraphQLInt,
 	GraphQLFloat
 } = require('graphql');
-var getField = require('../../../API/fbAPI').getField;
-var getEdge = require('../../../API/fbAPI').getEdge;
+var facebookAPI = require('../../../API/fbAPI');
 
 const fbVideoType = module.exports = new GraphQLObjectType({
 	name: 'fbVideo',
@@ -15,58 +14,58 @@ const fbVideoType = module.exports = new GraphQLObjectType({
 	fields: () => ({
 		/*-----------------------------------fields--------------------------*/
 		backdated_time_granularity: {type:GraphQLString,
-										resolve: ({id}) => getField({id},'backdated_time_granularity')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'backdated_time_granularity')},
 		content_category:			{type:GraphQLString,
-										resolve: ({id}) => getField({id},'content_category')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'content_category')},
 		created_time:				{type:GraphQLString,
-										resolve: ({id}) => getField({id},'created_time')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'created_time')},
 		description:				{type:GraphQLString},
 		embed_html:					{type:GraphQLString,
-										resolve: ({id}) => getField({id},'embed_html')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'embed_html')},
 		id:							{type:GraphQLString},
 		backdated_time:				{type:GraphQLString,
-										resolve: ({id}) => getField({id},'backdated_time')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'backdated_time')},
 		event:						{type:fbEventType,
-										resolve: ({id}) => getField({id},'event')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'event')},
 		format:						{type: new GraphQLList(fbVideoFormatType),
-										resolve: ({id}) => getField({id},'format')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'format')},
 		from:						{// profile
 										type:fbProfileType,
-										resolve: ({id}) => getField({id},'from')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'from')},
 		icon:						{type:GraphQLString,
-										resolve: ({id}) => getField({id},'icon')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'icon')},
 		length:						{type:GraphQLFloat,
-										resolve: ({id}) => getField({id},'length')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'length')},
 		permalink_url:				{type:GraphQLString,
-										resolve: ({id}) => getField({id},'permalink_url')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'permalink_url')},
 		picture:					{type:GraphQLString,
-										resolve: ({id}) => getField({id},'picture')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'picture')},
 		place:						{type:fbPlaceType,
-										resolve: ({id}) => getField({id},'place')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'place')},
 		source:						{type:GraphQLString,
-										resolve: ({id}) => getField({id},'source')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'source')},
 		title:						{type:GraphQLString,
-										resolve: ({id}) => getField({id},'title')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'title')},
 		universal_video_id:			{type:GraphQLString,
-										resolve: ({id}) => getField({id},'universal_video_id')},
+										resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'universal_video_id')},
 		updated_time:				{type:GraphQLString},
 		/*---------------------------------edges----------------------*/
 		captions:					{ type: new GraphQLList(fbVideoCaptionType),
-										resolve: ({id}) => getEdge({id},'captions')},
+										resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'captions')},
 		comments:					{ type: new GraphQLList(fbCommentType),
-										resolve: ({id}) => getEdge({id},'comments')},
+										resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'comments')},
 		likes:						{ type: new GraphQLList(fbLikeType),
-										resolve: ({id}) => getEdge({id},'likes')},
+										resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'likes')},
 		reactions:					{ type: new GraphQLList(fbReactionType),
-										resolve: ({id}) => getEdge({id},'reactions')},
+										resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'reactions')},
 		sharedposts:				{ type: new GraphQLList(fbPostType),
-										resolve: ({id}) => getEdge({id},'sharedposts')},
+										resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'sharedposts')},
 		sponsor_tags:				{ type: new GraphQLList(fbPageType),
-										resolve: ({id}) => getEdge({id},'sponsor_tags')},
+										resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'sponsor_tags')},
 		tags:						{ type: new GraphQLList(fbTaggableSubjectType2),
-										resolve: ({id}) => getEdge({id},'tags')},
+										resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'tags')},
 		thumbnails:					{ type: new GraphQLList(fbThumnailType),
-										resolve: ({id}) => getEdge({id},'thumbnails')}
+										resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'thumbnails')}
 	})
 });
 const fbTaggableSubjectType2 = new GraphQLObjectType({

@@ -73,7 +73,7 @@ export default {
 		 query_string_spotify:`{spotify {searchArtists(q:"Jay-z",limit:1) {href,id,name,type,uri }}}`,
 		 query_string_flickr: `{flickr{recentPhotos(extras:"0",per_page:10,page:1){id,title}}}`,
 		 query_string_instagram:`{instagram{usersSelf{data{id, username, full_name, profile_picture}}}}`,
-		 query_string_facebook:``,
+		 query_string_facebook:`{facebook {queryPage(q: "University YMCA - UIUC") {name,link,albums {name}}}}`,
 		 query_string_pinterest:``,
 		 query_string_youtube:`{youtube {search(q: "panda", maxResults: 5, type: "video") {snippet {title,description}}}}`,
 		 query_string_tumblr:`{tumblr {searchPosts(tag: "science", limit: 5) {type,post_url,summary}}}`

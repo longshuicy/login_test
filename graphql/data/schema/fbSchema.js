@@ -6,7 +6,7 @@ var {
 	GraphQLInt,
 	GraphQLFloat
 } = require('graphql');
-var search = require('../../API/fbAPI').search;
+var facebookAPI = require('./../../API/fbAPI');
 
 const fbQueryType =  module.exports = new GraphQLObjectType({
 	name:'fbQuery',
@@ -15,32 +15,32 @@ const fbQueryType =  module.exports = new GraphQLObjectType({
 		queryUser:{
 			type: new GraphQLList(fbUserType),
 			args:{ q: { type:GraphQLString } },
-			resolve: (_,args) => search(args,'user')
+			resolve: (_,args,context) => facebookAPI(context,'search', args,'user')
 		},
 		queryPage:{
 			type: new GraphQLList(fbPageType),
 			args:{ q: { type:GraphQLString } },
-			resolve: (_,args) => search(args,'page')
+			resolve: (_,args,context) => facebookAPI(context,'search',args,'page')
 		},
 		queryPlace: {
 			type: new GraphQLList(fbPlaceType),
 			args:{ q: { type:GraphQLString } },
-			resolve: (_,args) => search(args,'place')
+			resolve: (_,args,context) => facebookAPI(context,'search',args,'place')
 		},
 		queryEvent: {
 			type: new GraphQLList(fbEventType),
 			args:{ q: { type:GraphQLString } },
-			resolve: (_,args) => search(args,'event')
+			resolve: (_,args,context) => facebookAPI(context,'search',args,'event')
 		},
 		queryGroup: {
 			type: new GraphQLList(fbGroupType),
 			args:{ q: { type:GraphQLString } },
-			resolve: (_,args) => search(args,'group')
+			resolve: (_,args,context) => facebookAPI(context,'search',args,'group')
 		},
 		queryPlaceTopic:{
 			type: new GraphQLList(fbPlaceTopicType),
 			args:{ q: { type:GraphQLString } },
-			resolve: (_,args) => search(args,'placetopic')
+			resolve: (_,args,context) => facebookAPI(context,'search',args,'placetopic')
 		}
 	})
 });

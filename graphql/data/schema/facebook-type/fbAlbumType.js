@@ -5,8 +5,7 @@ var {
 	GraphQLInt,
 	GraphQLFloat
 } = require('graphql');
-var getField = require('../../../API/fbAPI').getField;
-var getEdge = require('../../../API/fbAPI').getEdge;
+var facebookAPI = require('../../../API/fbAPI');
 
 const fbAlbumType = module.exports = new GraphQLObjectType({
 	name: 'fbAlbum',
@@ -17,39 +16,39 @@ const fbAlbumType = module.exports = new GraphQLObjectType({
 		name: 			{ type: GraphQLString },
 		created_time:	{ type: GraphQLString },
 		count: 			{ type: GraphQLInt,
-							resolve: ({id}) => getField({id},'count')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'count')},
 		
 		description:	{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'description')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'description')},
 		link:			{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'link')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'link')},
 		location:		{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'location')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'location')},
 		privacy:		{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'privacy')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'privacy')},
 		type:			{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'type')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'type')},
 		updated_time: 	{ type: GraphQLString,
-							resolve: ({id}) => getField({id},'updated_time')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'updated_time')},
 		from:			{ type: fbProfileType,
-							resolve: ({id}) => getField({id},'from')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'from')},
 		place:			{ type: fbPageType,
-							resolve: ({id}) => getField({id},'place')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'place')},
 		cover_photo:	{ type: fbPhotoType,
-							resolve: ({id}) => getField({id},'cover_photo')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'cover_photo')},
 		event:			{ type: fbEventType,
-							resolve: ({id}) => getField({id},'event')},
+							resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'event')},
 		/*-------------------------- edges ---------------------------------- */
 		photos:			{ type: new GraphQLList(fbPhotoType),
-							resolve: ({id}) => getEdge({id},'photos')},
+							resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'photos')},
 		sharedposts:	{ type: new GraphQLList(fbPostType),
-							resolve: ({id}) => getEdge({id},'sharedposts')},
+							resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'sharedposts')},
 		likes:			{ type: new GraphQLList(fbLikeType),
-							resolve: ({id}) => getEdge({id},'likes')},
+							resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'likes')},
 		reactions:		{ type: new GraphQLList(fbReactionType),
-							resolve: ({id}) => getEdge({id},'reactions')},
+							resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'reactions')},
 		comments:		{ type: new GraphQLList(fbCommentType),
-							resolve: ({id}) => getEdge({id},'comments')}
+							resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'comments')}
 	})
 });
 

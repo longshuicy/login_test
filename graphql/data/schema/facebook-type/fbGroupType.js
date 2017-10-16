@@ -5,8 +5,7 @@ var {
 	GraphQLInt,
 	GraphQLFloat
 } = require('graphql');
-var getField = require('../../../API/fbAPI').getField;
-var getEdge = require('../../../API/fbAPI').getEdge;
+var facebookAPI = require('../../../API/fbAPI');
 
 const fbGroupType = module.exports = new GraphQLObjectType({
 	name: 'fbGroup',
@@ -15,37 +14,37 @@ const fbGroupType = module.exports = new GraphQLObjectType({
 		/*-------------------------------------fields------------------------------------*/
 		id:						{ type: GraphQLString },
 		cover: 					{ type: fbCoverPhotoType,
-									resolve: ({id}) => getField({id},'cover')},
+									resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'cover')},
 		description: 			{ type: GraphQLString,
-									resolve: ({id}) => getField({id},'description')},
+									resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'description')},
 		email:					{ type: GraphQLString,
-									resolve: ({id}) => getField({id},'email')},
+									resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'email')},
 		icon:					{ type: GraphQLString,
-									resolve: ({id}) => getField({id},'icon')},
+									resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'icon')},
 		member_request_count:	{ type: GraphQLInt,
-									resolve: ({id}) => getField({id},'member_request_count')},
+									resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'member_request_count')},
 		name:					{ type: GraphQLString},
 		owner: 					{ type: fbProfileType},
 		parent: 				{ type: fbProfileType},
 		privacy: 				{ type: GraphQLString,
-									resolve: ({id}) => getField({id},'privacy')},
+									resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'privacy')},
 		updated_time:			{ type: GraphQLString,
-									resolve: ({id}) => getField({id},'updated_time')},
+									resolve: ({id},_,context) => facebookAPI(context,'getField',{id},'updated_time')},
 		/*-------------------------------------edges------------------------------------*/
 		admins:					{ type: new GraphQLList(fbUserType),
-									resolve: ({id}) => getEdge({id},'admins')},
+									resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'admins')},
 		albums:					{ type: new GraphQLList(fbAlbumType),
-									resolve: ({id}) => getEdge({id},'albums')},
+									resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'albums')},
 		events:					{ type: new GraphQLList(fbEventType),
-									resolve: ({id}) => getEdge({id},'events')},				
+									resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'events')},				
 		members:				{ type: new GraphQLList(fbUserType),
-									resolve: ({id}) => getEdge({id},'members')},
+									resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'members')},
 		photos:					{ type: new GraphQLList(fbPhotoType),
-									resolve: ({id}) => getEdge({id},'photos')},
+									resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'photos')},
 		feed:					{ type: new GraphQLList(fbPostType),
-									resolve: ({id}) => getEdge({id},'feed')},
+									resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'feed')},
 		videos:					{ type: new GraphQLList(fbVideoType),
-									resolve: ({id}) => getEdge({id},'videos')}
+									resolve: ({id},_,context) => facebookAPI(context,'getEdge',{id},'videos')}
 	})
 });
 

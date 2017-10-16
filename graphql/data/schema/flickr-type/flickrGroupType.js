@@ -25,11 +25,11 @@ const flickrGroupType = module.exports = new GraphQLObjectType({
 		pool_count:			{type:GraphQLInt},
 		
 		groupInfo:			{type:flickrGroupInfoType,
-								resolve:({nsid})=>flickrAPI(resolveName="groupInfo",addon={"group_id":nsid},args={})},
+								resolve:({nsid},_,context)=>flickrAPI(context,resolveName="groupInfo",addon={"group_id":nsid},args={})},
 								
 		topics:				{type: new GraphQLList(flickrTopicType),
 								description:'Get a list of discussion topics in a group.',
-									resolve:({nsid})=>flickrAPI(resolveName="topics",addon={"group_id":nsid},args={})},
+									resolve:({nsid},_,context)=>flickrAPI(context,resolveName="topics",addon={"group_id":nsid},args={})},
 		})
 });
 

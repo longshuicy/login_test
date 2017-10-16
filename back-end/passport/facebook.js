@@ -5,6 +5,7 @@ var router = express.Router();
 var config = require('../config.js');
 var redis = require('redis');
 var client = redis.createClient();
+var fetch = require('node-fetch');
 
 client.on('error', function (err) {
     console.log('Error ' + err);
@@ -18,6 +19,7 @@ passport.use(new Strategy({
   function(accessToken, refreshToken, profile, cb) {
     profile.refreshToken = refreshToken;
     profile.accessToken = accessToken;
+	//console.log(profile);
     return cb(null,profile);
   }));
 

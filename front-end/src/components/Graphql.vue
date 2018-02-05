@@ -68,7 +68,77 @@ export default {
          s: null,
          str: null,
 
-         query_string_twitter: `{twitter {queryUser(q: \"bill\", count: 4, pageNum: 1) {author_id, profile_image_url}}}`,
+         query_string_twitter: `{
+								  twitter {
+									queryTweet(q: "trump",count:1,pages:1) {
+									  TwitterTweetField_id
+									  TwitterTweetField_id_str
+									  TwitterTweetField_created_at
+									  TwitterTweetField_text
+									  TwitterTweetField_retweet_count
+									  TwitterTweetField_favorite_count
+									  TwitterTweetField_retweeted
+									  TwitterTweetField_favorited
+									  TwitterTweetField_possibly_sensitive
+									  TwitterTweetField_truncated
+									  TwitterTweetField_lang
+									  TwitterTweetField_in_reply_to_user_id_str
+									  TwitterTweetField_in_reply_to_status_id_str
+									  TwitterTweetField_in_reply_to_screen_name
+									  TwitterTweetField_timestamp_ms
+									  TwitterTweetField_mentions
+									  TwitterTweetField_hashtags
+									  TwitterTweetField_urls
+									  TwitterTweetField_is_quote_status
+									  TwitterTweetField_emoticons
+									  TwitterTweetField_source
+									  TwitterTweetField_sentiments
+									  TwitterTweetField_filter_level
+									  TwitterTweetField_place {
+										TwitterPlaceField_country_code
+										TwitterPlaceField_full_name
+										TwitterPlaceField_country
+										TwitterPlaceField_id
+										TwitterPlaceField_name
+										TwitterPlaceField_url
+										TwitterPlaceField_place_type
+										TwitterPlaceField_bounding_box_type
+										TwitterPlaceField_bounding_box_coordinates
+									  }
+									  TwitterTweetField_coordinates {
+										TwitterCoordinateField_type
+										TwitterCoordinateField_lon
+										TwitterCoordinateField_lat
+									  }
+									  TwitterTweetField_user_mentions {
+										TwitterUserMentionField_id
+										TwitterUserMentionField_id_str
+										TwitterUserMentionField_name
+										TwitterUserMentionField_screen_name
+									  }
+									  TwitterTweetField_user {
+										TwitterUserField_id
+										TwitterUserField_id
+										TwitterUserField_screen_name
+									  }
+									  TwitterTweetField_entities {
+										TwitterEntityField_urls
+										TwitterEntityField_hashtags
+									  }
+									  TwitterTweetField_retweet(count: 1) {
+										TwitterRetweetField_id
+										TwitterRetweetField_id_str
+										TwitterRetweetField_text
+										TwitterRetweetField_created_at
+										TwitterRetweetField_in_reply_to_status_id_str
+										TwitterRetweetField_in_reply_to_user_id_str
+										TwitterRetweetField_in_reply_to_screen_name
+										TwitterRetweetField_favorite_count
+										TwitterRetweetField_retweet_count
+									  }
+									}
+								  }
+								}`,
          query_string_reddit: `{reddit{searchSubredditNames(query:"uiuc")}}`,
 		 query_string_spotify:`{spotify {searchArtists(q:"Jay-z",limit:1) {href,id,name,type,uri }}}`,
 		 query_string_flickr: `{flickr{recentPhotos(extras:"0",per_page:10,page:1){id,title}}}`,

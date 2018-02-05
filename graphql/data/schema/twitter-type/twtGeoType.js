@@ -14,16 +14,25 @@ const twtGeoType = module.exports = new GraphQLObjectType({
 	id when updating a status.`,
 	fields : ()=> ({
 		/*--------------------------basic------------------------*/
-		attributes: {type: GraphQLString },
-		country:	{type: GraphQLString },
-		country_code: {type: GraphQLString },
-		full_name:	{type: GraphQLString },
-		id: 		{type: GraphQLString },
-		name:		{type: GraphQLString },
-		place_type: {type: GraphQLString },
-		url: 		{type: GraphQLString },
+		TwitterGeoField_attributes: {type: GraphQLString,
+						resolve:({attributes}) =>{ return attributes}},
+		TwitterGeoField_country:	{type: GraphQLString,
+						resolve:({country}) =>{ return country}},
+		TwitterGeoField_country_code: {type: GraphQLString,
+						resolve:({country_code}) =>{ return country_code}},
+		TwitterGeoField_full_name:	{type: GraphQLString,
+						resolve:({full_name}) =>{ return full_name}},
+		TwitterGeoField_id: 		{type: GraphQLString,
+						resolve:({id}) =>{ return id}},
+		TwitterGeoField_name:		{type: GraphQLString,
+						resolve:({name}) =>{ return name}},
+		TwitterGeoField_place_type: {type: GraphQLString,
+						resolve:({place_type}) =>{ return place_type}},
+		TwitterGeoField_url: 		{type: GraphQLString,
+						resolve:({url}) =>{ return url}},
 		/*--------------------------nested------------------------*/
-		contained_within: {type: new GraphQLList(twtGeoType) }
+		TwitterGeoField_contained_within: {type: new GraphQLList(twtGeoType),
+							resolve:({contained_within}) =>{ return contained_within}}
 	})
 });
 

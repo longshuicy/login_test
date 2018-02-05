@@ -10,9 +10,9 @@ function twitterAPI(tokens,resolveName, id, args){
 			consumer_key:process.env.TWITTER_CONSUMER_KEY,
 			consumer_secret:process.env.TWITTER_CONSUMER_SECRET,
 			access_token_key:tokens.twtaccesstokenkey,
-			access_token_secret:tokens.twtaccesstokensecret
+			access_token_secret:tokens.twtaccesstokensecret		
 		})
-	
+		
 	return new Promise((resolve,reject) =>{
 		switch(resolveName){	
 			
@@ -85,7 +85,7 @@ function twitterAPI(tokens,resolveName, id, args){
 				break;
 				
 			case 'fetchRetweet':
-				client.get('statuses/retweets/' + tweet.id_str, args, function(error,tweets,response){
+				client.get('statuses/retweets/' + id, args, function(error,tweets,response){
 					if (error) reject(error);
 					//console.log(tweets);
 					resolve(tweets);

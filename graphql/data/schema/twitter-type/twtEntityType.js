@@ -11,7 +11,7 @@ const twtEntityType = module.exports = new GraphQLObjectType({
 	description : 'entity of a tweet or user',
 	fields      : () => ({
 		/*--------------------------basic------------------------*/
-		urls:				{	type: new GraphQLList(GraphQLString),
+		TwitterEntityField_urls:				{	type: new GraphQLList(GraphQLString),
 								resolve: ({urls}) => { 
 														var url_list = new Array();
 														urls.forEach(function(url){
@@ -20,7 +20,7 @@ const twtEntityType = module.exports = new GraphQLObjectType({
 														return url_list
 													}
 							},
-		hashtags:			{ 	type: new GraphQLList(GraphQLString),
+		TwitterEntityField_hashtags:			{ 	type: new GraphQLList(GraphQLString),
 								resolve: ({hashtags}) => { 
 															var tag_list = new Array();
 															hashtags.forEach(function(hashtag){
@@ -29,7 +29,8 @@ const twtEntityType = module.exports = new GraphQLObjectType({
 															return tag_list 
 														}
 							},
-		user_mentions:		{ type: new GraphQLList(twtUserType)},
+		TwitterEntityField_user_mentions:		{ type: new GraphQLList(twtUserType),
+								resolve:({user_mentions}) =>{ return user_mentions}},
 	  })
 });
 

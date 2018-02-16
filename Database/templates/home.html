@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <link href="../static/css/home_style.css" rel="stylesheet"/>
+    <script src="../static/js/jquery-1.11.2.min.js"></script>
+    <script src="../static/js/cytoscape.js"></script>
+    <script src="../static/js/cytoscape-edgehandles.js"></script>
+    <script src="../static/js/cytoscape-cxtmenu.js"></script>
+    <script src="../static/js/graph.js"></script>
+    <script src="../static/js/style.js"></script>
+</head>
+
+<body onload="loadGraph('{{username}}', '{{hashkey}}');">
+    <h1 id="title">Welcome {{username}}</h1>
+    <div id="DisplayArea">
+        <ul id="sidebar" class="side-by-side">
+            <li id="resource" class="first_level">
+                <a href="#" onclick="showResources();">Resources</a>
+                <ul id="resources" style="display: none;">
+                    <p><input type="checkbox" value="twitter" checked="checked"> twitter </input></p>
+                    <p><input type="checkbox" value="facebook" checked="checked"> facebook </input></p>
+                    <p><input type="checkbox" value="reddit" checked="checked"> reddit </input></p>
+                </ul>
+            </li>
+            <li id="object" class="first_level">
+                <a href="#" onclick="showObjects();">Objects</a>
+                <ul id="objects" style="display: none;">
+                    <li>
+                        <a href="#" onclick="showTwitterObjects();">twitter</a>
+                        <ul id="twitterObjects" style="display: none;">
+                            <li>
+                                <input type="checkbox" value="User" checked="checked" class="objectCheckbox"></input>
+                                <a href="#" onclick="showTwitterUserProperties();">User</a>
+                                <ul id="twitterUserProperties" style="display: none;">
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'author_id', 'String');">author_id</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'author_id_str', 'String');">author_id_str</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'name', 'String');">name</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'screen_name', 'String');">screen_name</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'description', 'String');">description</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'author_created_at', 'String');">author_created_at</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'profile_image_url', 'String');">profile_image_url</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'profile_banner_url', 'String');">profile_banner_url</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'url', 'String');">url</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'location', 'String');">location</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'tweets_count', 'Int');">tweets_count</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'followers_count', 'Int');">followers_count</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'friends_count', 'Int');">friends_count</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'listed_count', 'Int');">listed_count</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'favourites_count', 'Int');">favourites_count</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'statuses_count', 'Int');">statuses_count</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'time_zone', 'String');">time_zone</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'protected', 'Boolean');">protected</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'verified', 'Boolean');">verified</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'is_translator', 'Boolean');">is_translator</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'contributors_enabled', 'Boolean');">contributors_enabled</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'geo_enabled', 'Boolean');">geo_enabled</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'User', 'lang', 'String');">lang</a>
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <input type="checkbox" value="Tweet" checked="checked" class="objectCheckbox"></input>
+                                <a href="#" onclick="showTwitterTweetProperties();">Tweet</a>
+                                <ul id="twitterTweetProperties" style="display: none;">
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'tweet_id', 'String');">tweet_id</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'id_str', 'String');">id_str</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'created_at', 'String');">created_at</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'text', 'String');">text</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'retweet_count', 'Int');">retweet_count</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'favorite_count', 'Int');">favorite_count</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'retweeted', 'Boolean');">retweeted</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'favorited', 'Boolean');">favorited</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'possibly_sensitive', 'Boolean');">possibly_sensitive</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'truncated', 'Boolean');">truncated</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'lang', 'String');">lang</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'in_reply_to_user_id_str', 'String');">in_reply_to_user_id_str</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'in_reply_to_status_id_str', 'String');">in_reply_to_status_id_str</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'in_reply_to_screen_name', 'String');">in_reply_to_screen_name</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'timestamp_ms', 'String');">timestamp_ms</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'mentions', 'List');">mentions</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'hashtags', 'List');">hashtags</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'urls', 'String');">urls</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'is_quote_status', 'Boolean');">is_quote_status</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'emoticons', 'String');">emoticons</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'source', 'String');">source</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'sentiments', 'String');">sentiments</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Tweet', 'filter_level', 'String');">filter_level</a>
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <input type="checkbox" value="Geo" checked="checked" class="objectCheckbox"></input>
+                                <a href="#" onclick="showTwitterGeoProperties();">Geo</a>
+                                <ul id="twitterGeoProperties" style="display: none;">
+                                    <a href="#" onclick="addConstrain('twitter', 'Geo', 'geo_id', 'String');">geo_id</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Geo', 'attributes', 'String');">attributes</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Geo', 'country', 'String');">country</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Geo', 'country_code', 'String');">country_code</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Geo', 'full_name', 'String');">full_name</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Geo', 'name', 'String');">name</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Geo', 'place_type', 'String');">place_type</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Geo', 'url', 'String');">url</a>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <input type="checkbox" value="Place" checked="checked" class="objectCheckbox"></input>
+                                <a href="#" onclick="showTwitterPlaceProperties();">Place</a>
+                                <ul id="twitterPlaceProperties" style="display: none;">
+                                    <a href="#" onclick="addConstrain('twitter', 'Place', 'place_id', 'String');">place_id</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Place', 'country', 'String');">country</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Place', 'country_code', 'String');">country_code</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Place', 'full_name', 'String');">full_name</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Place', 'name', 'String');">name</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Place', 'place_type', 'String');">place_type</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Place', 'url', 'String');">url</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Place', 'bounding_box_type', 'String');">bounding_box_type</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Place', 'bounding_box_coordinates', 'String');">bounding_box_coordinates</a>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <input type="checkbox" value="Coordinate" checked="checked" class="objectCheckbox"></input>
+                                <a href="#" onclick="showTwitterCoordinateProperties();">Coordinate</a>
+                                <ul id="twitterCoordinateProperties" style="display: none;">
+                                    <a href="#" onclick="addConstrain('twitter', 'Coordinate', 'coordiante_id', 'String');">coordiante_id</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Coordinate', 'type', 'String');">type</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Coordinate', 'lon', 'Float');">lon</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Coordinate', 'lat', 'Float');">lat</a>
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <input type="checkbox" value="Entity" checked="checked" class="objectCheckbox"></input>
+                                <a href="#" onclick="showTwitterEntityProperties();">Entity</a>
+                                <ul id="twitterEntityProperties" style="display: none;">
+                                    <a href="#" onclick="addConstrain('twitter', 'Entity', 'entity_id', 'String');">entity_id</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Entity', 'urls', 'List');">urls</a>
+                                    <a href="#" onclick="addConstrain('twitter', 'Entity', 'hashtags', 'List');">hashtags</a>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#" onclick="showFacebookObjects();">facebook</a>
+                        <ul id="facebookObjects" style="display: none;">
+                            <li>name</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#" onclick="showRedditObjects();">reddit</a>
+                        <ul id="redditObjects" style="display: none;">
+                            <li>name</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li id="relation" class="first_level">
+                <a href="#" onclick="showRelations();">Relations</a>
+                <ul id="relations" style="display: none;">
+<!--                     <p><input type="checkbox" value="twitter" checked="checked"> twitter </input></p>
+                    <p><input type="checkbox" value="facebook" checked="checked"> facebook </input></p>
+                    <p><input type="checkbox" value="reddit" checked="checked"> reddit </input></p> -->
+                </ul>
+            </li>
+        </ul>
+        <div id="cy" class="side-by-side"> </div>
+        <ul id="info" class="side-by-side">Constrains you applied</ul>
+    </div>
+        
+</body>
+
+<div id="Constrain">
+    <h3 id="ConstrainTitle">Title will be set in later</h3>
+    <form action="#" id="ConstrainForm" onsubmit="return false;">
+        <input id="Property" type="text"/>
+        <div id="exclusive_or_inclusive_div">
+            <select id="exclusive_or_inclusive">
+                <option value=""> </option>
+                <option value="!">NOT</option>
+            </select>
+        </div>
+
+            
+        <div class="ConstrainFormElement" id="NumberOperatorDiv">
+            <select id="NumberOperator">
+                <option value="=">=</option>
+                <option value="!=">!=</option>
+                <option value=">">></option>
+                <option value="<"><</option>
+                <option value=">=">>=</option>
+                <option value="<="><=</option>
+                <!-- <option value="in">IN</option> -->
+            </select>
+        </div>
+
+        <div class="ConstrainFormElement" id="StringOperatorDiv">
+            <select id="StringOperator">
+                <option value="=">equals</option>
+                <option value="^=">starts with</option>
+                <option value="$=">ends with</option>
+                <option value="*=">contains</option>
+                <!-- <option value="=~">with regular expression</option>
+                <option value="in">in</option> -->
+            </select>
+        </div>
+
+        <div class="ConstrainFormElement" id="ListOperatorDiv">
+            <select id="ListOperator">
+                <option value="in">list contains</option>
+            </select>
+        </div>
+
+        <div class="ConstrainFormElement" id="BooleanValueDiv">
+            <select id="BooleanValue">
+                <option value="?">True</option>
+                <option value="!">False</option>
+            </select>
+        </div>
+
+        <div class="ConstrainFormElement" id="RHSvalueDiv">
+            <input id="RHSvalue" placeholder="value" type="text"/>              
+        </div>
+
+        <div id="ConstrainButtons">
+            <button class="ConstrainButton" id="SubmitConstrain" type="submit" onclick="applyConstrain('{{hashkey}}');">Submit</button>
+            <button class="ConstrainButton" id="ResetConstrain" type="button" onclick="cancelConstrain();">Cancel</button>
+        </div>
+            
+            
+    </form>
+</div>
+
+<div id="NodeDetail">
+    <button class="Close" id = "CloseDetails" onclick="closeNodeDetail();">X</button>
+    <h3 id="NodeDetailTitle">Details of the node you clicked</h3>
+    <div id="DisplayDetailsArea"></div>
+</div>
+
+
+</html>

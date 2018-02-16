@@ -1,0 +1,15 @@
+{
+  "name": "my-login_3",
+  "version": "1.0.0",
+  "description": "a test for login",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd front-end && npm start\" \"cd back-end && npm start\" \"cd graphql && npm start\""
+  },
+  "author": "zongyihaha",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^3.5.0",
+    "eventsource-polyfill": "^0.9.6"
+  }
+}

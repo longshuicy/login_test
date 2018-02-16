@@ -1,0 +1,220 @@
+html, body
+{
+    height: 100%;
+}
+
+.Close {
+    position: absolute;
+    background: red;
+    color: white;
+    top: 0;
+    right: 0;
+}
+
+h1 {
+    text-align: center;
+}   
+
+#StartButtons{
+    margin: 0 auto;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+#MainArea
+{
+    overflow: auto;
+    position: relative;
+    margin: -10px auto; /* -height/2 */
+    width: 100%;
+    height: 90%;
+    /*display:inline-block*/
+    display: none;
+}
+
+#cy {
+    background-color: #f9f9f9;
+    height: 100%;
+    width: 80%;
+    margin : 0 auto;
+    position: relative;
+}
+
+
+#DatasetButtons
+{
+    width: 10%;
+    margin: 0 auto;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+}
+
+
+#DatasetButtons button 
+{
+    margin: 0 auto;
+    width: 60%;
+    height: 10%;
+    display: none;
+}
+
+
+/*#SaveDataset
+{
+    display: none;
+}
+
+#CancelDataset
+{
+    display: none;
+}*/
+
+
+#Constrain {
+    display: none;
+    border: 6px solid salmon; 
+    padding: 2em;
+    width: 400px;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%)
+}
+
+
+#Constrain h3 {
+    margin:auto;
+    line-height:30px;
+    vertical-align:middle;
+}
+
+
+.ConstrainFormElement
+{
+    display: none;
+}
+
+#Constrain input, select, textarea {
+    width: 60%;
+    box-sizing:border-box;
+    padding: 2px;
+    font-family: inherit; 
+    text-transform: inherit;
+    font-size: inherit;
+    text-align-last:center;
+}
+
+#ConstrainButtons.input
+{
+    display: inline-block;
+}
+
+#NodeDetail {
+    display: none;
+    border: 6px solid salmon; 
+    padding: 2em;
+    /*width: 400px;*/
+    width: auto;
+    height : auto;
+
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%)
+}
+
+#DisplayDetailsArea
+{
+    text-align: left;
+    background: #fff;
+}
+
+
+
+#EdgeChoices {
+    display: none;
+    border: 6px solid salmon; 
+    padding: 2em;
+    width: 400px;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%)
+}
+
+#EdgeChoices input{
+    width: 100%;
+    box-sizing:border-box;
+    padding: 2px;
+    font-family: inherit; 
+    text-transform: inherit;
+    font-size: inherit;
+    text-align-last:center;
+}
+
+
+.node {
+  cursor: pointer;
+  stroke: #3182bd;
+  stroke-width: 1.5px;
+}
+
+.link {
+  fill: none;
+  stroke: #9ecae1;
+  stroke-width: 1.5px;
+}
+
+
+
+#ProcessButtons
+{
+    width: 10%;
+    margin: 0 auto;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+}
+
+#ProcessButtons button 
+{
+    margin: 0 auto;
+    width: 60%;
+    height: 10%;
+    display: none;
+}
+
+#UploadButtons
+{
+    width: 10%;
+    margin: 0 auto;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+}
+
+#UploadButtons button 
+{
+    margin: 0 auto;
+    width: 60%;
+    height: 10%;
+    display: none;
+}

@@ -1,0 +1,89 @@
+{
+	"User" : {
+				"author_id" : "String",
+				"author_id_str" : "String",
+				"name" : "String",
+				"screen_name" : "String",
+				"description" : "String",
+				"author_created_at" : "String",
+				"profile_image_url" : "String",
+				"profile_banner_url" : "String",
+				"url" : "String",
+				"location" : "String",
+				"tweets_count" : "Int",
+				"followers_count" : "Int",
+				"friends_count" : "Int",
+				"listed_count" : "Int",
+				"favourites_count" : "Int",
+				"statuses_count" : "Int",
+				"time_zone" : "String",
+				"protected" : "Boolean",
+				"verified" : "Boolean",
+				"is_translator" : "Boolean",
+				"contributors_enabled" : "Boolean",
+				"geo_enabled" : "Boolean",
+				"lang" : "String"
+	},
+
+	"Tweet" : {
+				"tweet_id" : "String",
+				"id_str" : "String",
+				"created_at" : "String",
+				"text" : "String",
+				"retweet_count" : "Int",
+				"favorite_count" : "Int",
+				"retweeted" : "Boolean",
+				"favorited" : "Boolean",
+				"possibly_sensitive" : "Boolean",
+				"truncated" : "Boolean",
+				"lang" : "String",
+				"in_reply_to_user_id_str" : "String",
+				"in_reply_to_status_id_str" : "String",
+				"in_reply_to_screen_name" : "String",
+				"timestamp_ms" : "String",
+				"mentions" : "List",
+				"hashtags" : "List",
+				"urls" : "String",
+				"is_quote_status" : "Boolean",
+				"emoticons" : "String",
+				"source" : "String",
+				"sentiments" : "String",
+				"filter_level" : "String"
+	},
+
+	"Geo" : {
+				"geo_id" : "String",
+				"attributes" : "String",
+				"country" : "String",
+				"country_code" : "String",
+				"full_name" : "String",
+				"name" : "String",
+				"place_type" : "String",
+				"url" : "String"
+	},
+
+	"Place" : {
+				"place_id" : "String",
+				"country_code" : "String",
+				"country" : "String",
+				"full_name" : "String",
+				"name" : "String",
+				"place_type" : "String",
+				"url" : "String",
+				"bounding_box_type" : "String",
+				"bounding_box_coordinates" : "String"
+	},
+
+	"Coordinate" : {
+				"coordiante_id" : "String",
+				"type" : "String",
+				"lon" : "Float",
+				"lat" : "Float"
+	},
+
+	"Entity" : {
+				"entity_id" : "String",
+				"urls" : "List",
+				"hashtags" : "List"
+	}
+}

@@ -17,6 +17,21 @@ A table called "users" should be created in the database and have at least usern
 
 5. put .env file in back-end folder https://drive.google.com/file/d/0B8JvcWvoUuxaRkhyZkE5Y2ZCWUE/view?usp=sharing
 
+
+### Database folder prerequisit
+1.install python
+
+2.install python package listed in app.py:
+    flask==0.12.2
+    py2neo==2.0.8
+    flatten_json
+    
+3.download neo4j database and install
+
+4.set password of neo4j to 123456 and start neo4j
+
+5.run app.py
+
 ### Flow
 1. User register
 
